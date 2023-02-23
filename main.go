@@ -12,6 +12,7 @@ func main() {
 		fmt.Printf("load config failed, err:%v\n", err)
 		return
 	}
+	//初始化数据库
 	if err := mysql.InitializeDB(settings.Conf.MySQLConfig); err != nil {
 		fmt.Printf("init mysql failed, err:%v\n", err)
 		return

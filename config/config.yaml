@@ -14,3 +14,8 @@ mysql:
   dbname: "system_admin"
   max_open_conns: 200
   max_idle_conns: 50
+
+jwt:
+  header: Authorization
+  expire: 3600
+  key: asdhkmytoysfwhgdnkyklyutldwyiram

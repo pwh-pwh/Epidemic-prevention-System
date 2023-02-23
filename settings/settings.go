@@ -18,6 +18,7 @@ type AppConfig struct {
 	//*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
 	//*RedisConfig `mapstructure:"redis"`
+	*JwtConfig `mapstructure:"jwt"`
 }
 
 type MySQLConfig struct {
@@ -28,6 +29,12 @@ type MySQLConfig struct {
 	Port         int    `mapstructure:"port"`
 	MaxOpenConns int    `mapstructure:"max_open_conns"`
 	MaxIdleConns int    `mapstructure:"max_idle_conns"`
+}
+
+type JwtConfig struct {
+	Expire int    `mapstructure:"expire"`
+	Header string `mapstructure:"header"`
+	Key    string `mapstructure:"key"`
 }
 
 //type RedisConfig struct {

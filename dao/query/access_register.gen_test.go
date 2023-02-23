@@ -35,6 +35,42 @@ func Test_GetARList(t *testing.T) {
 	}
 }
 
+func Test_ArUpdate(t *testing.T) {
+	register := Use(db).AccessRegister
+	accessRegister := models.AccessRegister{
+		ID:     1,
+		Remark: "正常返校1",
+	}
+	_, err := register.WithContext(context.Background()).Where(register.ID.Eq(accessRegister.ID)).Update(register.Remark, accessRegister.Remark)
+	if err != nil {
+		log.Println(err)
+	}
+}
+
+func Test_ArDelete(t *testing.T) {
+	register := Use(db).AccessRegister
+	_, err := register.WithContext(context.Background()).Debug().Where(register.ID.Eq(1)).Delete()
+	if err != nil {
+		log.Println(err)
+	}
+}
+
+func Test_ArCreate(t *testing.T) {
+	register := Use(db).AccessRegister
+	accessRegister := models.AccessRegister{
+		Name:   "李文",
+		Phone:  "13226948870",
+		Type:   1,
+		Card:   "342623199906214412",
+		Remark: "正常返校",
+		Dept:   "软件186",
+	}
+	err := register.WithContext(context.Background()).Debug().Create(&accessRegister)
+	if err != nil {
+		log.Println(err)
+	}
+}
+
 func Test_accessRegisterQuery(t *testing.T) {
 	accessRegister := newAccessRegister(db)
 	accessRegister = *accessRegister.As(accessRegister.TableName())
