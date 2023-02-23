@@ -1,0 +1,16 @@
+name: "coderpwh"
+mode: "dev"
+port: 8081
+version: "v0.0.1"
+start_time: "2022-04-09"
+machine_id: 1
+
+
+mysql:
+  host: "47.106.206.78"
+  port: 3306
+  user: "pwh"
+  password: "123456"
+  dbname: "system_admin"
+  max_open_conns: 200
+  max_idle_conns: 50
