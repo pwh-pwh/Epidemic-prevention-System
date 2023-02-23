@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/pwh-pwh/Epidemic-prevention-System/dao/models"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
+	"github.com/pwh-pwh/Epidemic-prevention-System/routers"
 	"github.com/pwh-pwh/Epidemic-prevention-System/settings"
 )
 
@@ -16,9 +16,12 @@ func main() {
 		fmt.Printf("init mysql failed, err:%v\n", err)
 		return
 	}
-	var ars []models.AccessRegister
-	mysql.DB.Find(&ars)
-	for _, item := range ars {
-		fmt.Println(item)
+	// 注册路由
+	r := routers.SetupRouter(settings.Conf.Mode)
+	err := r.Run(fmt.Sprintf(":%d", settings.Conf.Port))
+	if err != nil {
+		fmt.Printf("run server failed, err:%v\n", err)
+		return
 	}
+
 }

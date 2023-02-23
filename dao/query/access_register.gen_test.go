@@ -7,10 +7,10 @@ package query
 import (
 	"context"
 	"fmt"
+	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 	"log"
 	"testing"
 
-	"github.com/pwh-pwh/Epidemic-prevention-System/dao/models"
 	"gorm.io/gen"
 	"gorm.io/gen/field"
 	"gorm.io/gorm/clause"

@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -15,8 +16,6 @@ import (
 	"gorm.io/gen/field"
 
 	"gorm.io/plugin/dbresolver"
-
-	"github.com/pwh-pwh/Epidemic-prevention-System/dao/models"
 )
 
 func newAccessRegister(db *gorm.DB, opts ...gen.DOOption) accessRegister {
