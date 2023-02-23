@@ -17,8 +17,8 @@ type AppConfig struct {
 	MachineID int    `mapstructure:"machine_id"`
 	//*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
-	//*RedisConfig `mapstructure:"redis"`
-	*JwtConfig `mapstructure:"jwt"`
+	*RedisConfig `mapstructure:"redis"`
+	*JwtConfig   `mapstructure:"jwt"`
 }
 
 type MySQLConfig struct {
@@ -37,14 +37,15 @@ type JwtConfig struct {
 	Key    string `mapstructure:"key"`
 }
 
-//type RedisConfig struct {
-//	Host         string `mapstructure:"host"`
-//	Password     string `mapstructure:"password"`
-//	Port         int    `mapstructure:"port"`
-//	DB           int    `mapstructure:"db"`
-//	PoolSize     int    `mapstructure:"pool_size"`
-//	MinIdleConns int    `mapstructure:"min_idle_conns"`
-//}
+type RedisConfig struct {
+	Host         string `mapstructure:"host"`
+	Password     string `mapstructure:"password"`
+	Port         int    `mapstructure:"port"`
+	DB           int    `mapstructure:"db"`
+	PoolSize     int    `mapstructure:"pool_size"`
+	MinIdleConns int    `mapstructure:"min_idle_conns"`
+}
+
 //
 //type LogConfig struct {
 //	Level      string `mapstructure:"level"`
