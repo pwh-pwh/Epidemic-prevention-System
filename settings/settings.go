@@ -29,6 +29,7 @@ type MySQLConfig struct {
 	Port         int    `mapstructure:"port"`
 	MaxOpenConns int    `mapstructure:"max_open_conns"`
 	MaxIdleConns int    `mapstructure:"max_idle_conns"`
+	Debug        bool   `mapstructure:"debug"`
 }
 
 type JwtConfig struct {

@@ -14,6 +14,7 @@ func SetupRouter(mode string) *gin.Engine {
 	r.Use(middlewares.Recover)
 	r.Use(middlewares.CorsMiddleware())
 	r.GET("/captcha", controller.GetCaptcha)
+	r.POST("/login", middlewares.CaptchaMiddleware(), controller.LoginHander)
 	//注册路由
 	apiGroup := r.Group("/api/v1")
 	apiGroup.GET("/arlist", controller.GetAccessRegisterList)

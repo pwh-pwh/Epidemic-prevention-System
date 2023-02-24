@@ -21,6 +21,10 @@ type JwtData struct {
 
 var jwtData *JwtData
 
+func GetJwtHeader() string {
+	return jwtData.Header
+}
+
 func InitializeJWT(cfg *settings.JwtConfig) (err error) {
 	jwtData = &JwtData{
 		expire: cfg.Expire,
@@ -33,7 +37,7 @@ func InitializeJWT(cfg *settings.JwtConfig) (err error) {
 func ParseToken(tokenStr string) (*jwt.Token, *Claims, error) {
 	token := Claims{}
 	claims, err := jwt.ParseWithClaims(tokenStr, &token, func(token *jwt.Token) (interface{}, error) {
-		return jwtData.key, nil
+		return []byte(jwtData.key), nil
 	})
 	if err != nil {
 		return nil, nil, err
@@ -56,5 +60,5 @@ func ReleaseToken(userName string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(jwtData.key)
+	return token.SignedString([]byte(jwtData.key))
 }

@@ -27,6 +27,9 @@ func InitializeDB(cfg *settings.MySQLConfig) (err error) {
 	if err != nil {
 		return
 	}
+	if cfg.Debug {
+		DB = DB.Debug()
+	}
 	DB.Use(dbresolver.Register(dbresolver.Config{}).SetMaxOpenConns(cfg.MaxOpenConns).SetMaxIdleConns(cfg.MaxIdleConns))
 	return
 }

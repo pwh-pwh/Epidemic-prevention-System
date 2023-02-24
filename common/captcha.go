@@ -20,7 +20,7 @@ const (
 
 //TODO 返回图片base64
 func NewBase64Img() (string, string) {
-	id := captcha.NewLen(6)
+	id := captcha.NewLen(5)
 	fmt.Printf("id:%v\n", id)
 	buffer := bytes.Buffer{}
 	captcha.WriteImage(&buffer, id, StdWidth, StdHeight)
