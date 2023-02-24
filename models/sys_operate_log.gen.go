@@ -4,10 +4,6 @@
 
 package models
 
-import (
-	"time"
-)
-
 const TableNameSysOperateLog = "sys_operate_log"
 
 // SysOperateLog mapped from table <sys_operate_log>
@@ -25,7 +21,7 @@ type SysOperateLog struct {
 	JSONResult    string    `gorm:"column:json_result;type:varchar(2000)" json:"json_result"`          // 返回参数
 	Status        int32     `gorm:"column:status;type:int(1);default:1" json:"status"`                 // 操作状态（1正常 0异常）
 	ErrorMsg      string    `gorm:"column:error_msg;type:varchar(2000)" json:"error_msg"`              // 错误消息
-	OperTime      time.Time `gorm:"column:oper_time;type:datetime" json:"oper_time"`                   // 操作时间
+	OperTime      LocalTime `gorm:"column:oper_time;type:datetime" json:"oper_time"`                   // 操作时间
 }
 
 // TableName SysOperateLog's table name

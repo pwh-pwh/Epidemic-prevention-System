@@ -4,10 +4,6 @@
 
 package models
 
-import (
-	"time"
-)
-
 const TableNameSysLoginInfo = "sys_login_info"
 
 // SysLoginInfo mapped from table <sys_login_info>
@@ -20,7 +16,7 @@ type SysLoginInfo struct {
 	Os            string    `gorm:"column:os;type:varchar(50)" json:"os"`                              // 操作系统
 	Status        int32     `gorm:"column:status;type:int(1);default:1" json:"status"`                 // 登录状态（0成功 1失败）
 	Msg           string    `gorm:"column:msg;type:varchar(100)" json:"msg"`                           // 提示消息
-	LoginTime     time.Time `gorm:"column:login_time;type:datetime" json:"login_time"`                 // 访问时间
+	LoginTime     LocalTime `gorm:"column:login_time;type:datetime" json:"login_time"`                 // 访问时间
 }
 
 // TableName SysLoginInfo's table name

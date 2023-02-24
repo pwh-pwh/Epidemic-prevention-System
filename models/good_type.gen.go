@@ -4,24 +4,22 @@
 
 package models
 
-import (
-	"time"
-)
+import "gorm.io/plugin/soft_delete"
 
 const TableNameGoodType = "good_type"
 
 // GoodType mapped from table <good_type>
 type GoodType struct {
-	ID         int64     `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"` // 物资类型id
-	Type       string    `gorm:"column:type;type:varchar(30)" json:"type"`                          // 物资类型
-	OrderNum   int32     `gorm:"column:order_num;type:int(4)" json:"order_num"`                     // 排序
-	Status     int32     `gorm:"column:status;type:int(1);default:1" json:"status"`                 // 状态
-	CreateBy   string    `gorm:"column:create_by;type:varchar(30)" json:"create_by"`                // 创建人
-	CreateTime time.Time `gorm:"column:create_time;type:datetime" json:"create_time"`               // 创建时间
-	UpdateTime time.Time `gorm:"column:update_time;type:datetime" json:"update_time"`               // 更新时间
-	IsDelete   int32     `gorm:"column:is_delete;type:int(1)" json:"is_delete"`                     // 逻辑删除
-	Version    int32     `gorm:"column:version;type:int(11);default:1" json:"version"`              // 乐观锁
-	Remark     string    `gorm:"column:remark;type:varchar(80)" json:"remark"`                      // 备注
+	ID         int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`       // 物资类型id
+	Type       string                `gorm:"column:type;type:varchar(30)" json:"type"`                                // 物资类型
+	OrderNum   int32                 `gorm:"column:order_num;type:int(4)" json:"order_num"`                           // 排序
+	Status     int32                 `gorm:"column:status;type:int(1);default:1" json:"status"`                       // 状态
+	CreateBy   string                `gorm:"column:create_by;type:varchar(30)" json:"create_by"`                      // 创建人
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`           // 逻辑删除
+	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`                    // 乐观锁
+	Remark     string                `gorm:"column:remark;type:varchar(80)" json:"remark"`                            // 备注
 }
 
 // TableName GoodType's table name

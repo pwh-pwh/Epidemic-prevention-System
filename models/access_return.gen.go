@@ -4,10 +4,6 @@
 
 package models
 
-import (
-	"time"
-)
-
 const TableNameAccessReturn = "access_return"
 
 // AccessReturn mapped from table <access_return>
@@ -18,7 +14,7 @@ type AccessReturn struct {
 	Card       string    `gorm:"column:card;type:varchar(80)" json:"card"`                                   // 身份证号码
 	Remark     string    `gorm:"column:remark;type:varchar(255)" json:"remark"`                              // 备注
 	Dept       string    `gorm:"column:dept;type:varchar(50)" json:"dept"`                                   // 部门
-	CreateTime time.Time `gorm:"column:create_time;type:datetime" json:"create_time"`                        // 创建时间
+	CreateTime LocalTime `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"`    // 创建时间
 }
 
 // TableName AccessReturn's table name

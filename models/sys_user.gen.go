@@ -5,6 +5,7 @@
 package models
 
 import (
+	"gorm.io/plugin/soft_delete"
 	"time"
 )
 
@@ -12,20 +13,20 @@ const TableNameSysUser = "sys_user"
 
 // SysUser mapped from table <sys_user>
 type SysUser struct {
-	ID          int64     `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`
-	Username    string    `gorm:"column:username;type:varchar(64);uniqueIndex:UK_USERNAME,priority:1" json:"username"`
-	Password    string    `gorm:"column:password;type:varchar(64)" json:"password"`
-	Nickname    string    `gorm:"column:nickname;type:varchar(64)" json:"nickname"` // 昵称
-	Avatar      string    `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
-	PhoneNumber string    `gorm:"column:phone_number;type:varchar(64)" json:"phone_number"`
-	City        string    `gorm:"column:city;type:varchar(64)" json:"city"`
-	DeptID      int64     `gorm:"column:dept_id;type:bigint(20)" json:"dept_id"`
-	CreateTime  time.Time `gorm:"column:create_time;type:datetime" json:"create_time"`
-	UpdateTime  time.Time `gorm:"column:update_time;type:datetime" json:"update_time"`
-	Remark      string    `gorm:"column:remark;type:varchar(50)" json:"remark"`
-	Status      int32     `gorm:"column:status;type:int(5);not null" json:"status"`
-	IsDelete    int32     `gorm:"column:is_delete;type:int(1)" json:"is_delete"`
-	Version     int32     `gorm:"column:version;type:int(11);default:1" json:"version"`
+	ID          int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`
+	Username    string                `gorm:"column:username;type:varchar(64);uniqueIndex:UK_USERNAME,priority:1" json:"username"`
+	Password    string                `gorm:"column:password;type:varchar(64)" json:"password"`
+	Nickname    string                `gorm:"column:nickname;type:varchar(64)" json:"nickname"` // 昵称
+	Avatar      string                `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
+	PhoneNumber string                `gorm:"column:phone_number;type:varchar(64)" json:"phone_number"`
+	City        string                `gorm:"column:city;type:varchar(64)" json:"city"`
+	DeptID      int64                 `gorm:"column:dept_id;type:bigint(20)" json:"dept_id"`
+	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
+	UpdateTime  LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
+	IsDelete    soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`           // 逻辑删除
+	Remark      string                `gorm:"column:remark;type:varchar(50)" json:"remark"`
+	Status      int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
+	Version     int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
 }
 
 // TableName SysUser's table name

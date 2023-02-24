@@ -5,22 +5,22 @@
 package models
 
 import (
-	"time"
+	"gorm.io/plugin/soft_delete"
 )
 
 const TableNameSysRole = "sys_role"
 
 // SysRole mapped from table <sys_role>
 type SysRole struct {
-	ID         int64     `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`
-	Name       string    `gorm:"column:name;type:varchar(64);not null;uniqueIndex:name,priority:1" json:"name"`
-	Code       string    `gorm:"column:code;type:varchar(64);not null;uniqueIndex:code,priority:1" json:"code"`
-	Remark     string    `gorm:"column:remark;type:varchar(64)" json:"remark"` // 备注
-	CreateTime time.Time `gorm:"column:create_time;type:datetime" json:"create_time"`
-	UpdateTime time.Time `gorm:"column:update_time;type:datetime" json:"update_time"`
-	Status     int32     `gorm:"column:status;type:int(5);not null" json:"status"`
-	IsDelete   int32     `gorm:"column:is_delete;type:int(1)" json:"is_delete"`
-	Version    int32     `gorm:"column:version;type:int(11);default:1" json:"version"`
+	ID         int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`
+	Name       string                `gorm:"column:name;type:varchar(64);not null;uniqueIndex:name,priority:1" json:"name"`
+	Code       string                `gorm:"column:code;type:varchar(64);not null;uniqueIndex:code,priority:1" json:"code"`
+	Remark     string                `gorm:"column:remark;type:varchar(64)" json:"remark"`                            // 备注
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
+	Status     int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"` // 逻辑删除
+	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
 }
 
 // TableName SysRole's table name
