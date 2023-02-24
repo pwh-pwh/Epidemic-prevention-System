@@ -25,9 +25,9 @@ func InitAll() {
 		fmt.Printf("init redis failed, err:%v\n", err)
 		return
 	}
-	defer redis.Close()
 	if err := InitializeJWT(settings.Conf.JwtConfig); err != nil {
 		fmt.Printf("init jwt config failed, err:%v\n", err)
 		return
 	}
+	initRedisCatpcha()
 }

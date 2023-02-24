@@ -8,6 +8,7 @@ import (
 	"github.com/go-redis/redis"
 	myredis "github.com/pwh-pwh/Epidemic-prevention-System/dao/redis"
 	"log"
+	"sync"
 	"time"
 )
 
@@ -18,7 +19,7 @@ const (
 )
 
 //TODO 返回图片base64
-func NewBase64Img() string {
+func NewBase64Img() (string, string) {
 	id := captcha.NewLen(6)
 	fmt.Printf("id:%v\n", id)
 	buffer := bytes.Buffer{}
@@ -27,14 +28,22 @@ func NewBase64Img() string {
 	pre := "data:image/jpeg;base64,"
 	dataStr := base64.StdEncoding.EncodeToString(data)
 	res := pre + dataStr
-	return res
+	return res, id
 }
 
 func VerifyCaptcha(id, digits string) bool {
 	return captcha.VerifyString(id, digits)
 }
 
-var redisCaptcha *RedisCaptcha = newRedisCaptcha()
+var redisCaptcha *RedisCaptcha
+
+var once sync.Once
+
+func initRedisCatpcha() {
+	once.Do(func() {
+		redisCaptcha = newRedisCaptcha()
+	})
+}
 
 func newRedisCaptcha() *RedisCaptcha {
 	r := RedisCaptcha{

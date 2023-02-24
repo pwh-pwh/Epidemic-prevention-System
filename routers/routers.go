@@ -11,7 +11,9 @@ func SetupRouter(mode string) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode) // 设置成发布模式
 	}
 	r := gin.New()
+	r.Use(middlewares.Recover)
 	r.Use(middlewares.CorsMiddleware())
+	r.GET("/captcha", controller.GetCaptcha)
 	//注册路由
 	apiGroup := r.Group("/api/v1")
 	apiGroup.GET("/arlist", controller.GetAccessRegisterList)
