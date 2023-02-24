@@ -6,7 +6,6 @@ package models
 
 import (
 	"gorm.io/plugin/soft_delete"
-	"time"
 )
 
 const TableNameSysUser = "sys_user"

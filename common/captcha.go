@@ -18,7 +18,6 @@ const (
 	StdHeight = 50
 )
 
-//TODO 返回图片base64
 func NewBase64Img() (string, string) {
 	id := captcha.NewLen(5)
 	fmt.Printf("id:%v\n", id)
