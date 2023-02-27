@@ -5,4 +5,5 @@ const (
 	UserPre             = "User:"
 	GrantedAuthorityPre = "GrantedAuthority:"
 	DeptPre             = "DeptId:"
+	ChinaData           = "ChinaData"
 )

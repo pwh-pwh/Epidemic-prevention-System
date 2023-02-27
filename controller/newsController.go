@@ -1,11 +1,14 @@
 package controller
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
+	myredis "github.com/pwh-pwh/Epidemic-prevention-System/dao/redis"
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
 	"github.com/tidwall/gjson"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 func News(ctx *gin.Context) {
@@ -21,4 +24,19 @@ func News(ctx *gin.Context) {
 	}
 	r := gjson.GetBytes(data, "Result.0.items_v2.0.aladdin_res.DisplayData.result.items")
 	response.Success(ctx, r.Value())
+}
+
+func ChinaData(ctx *gin.Context) {
+	redisClient := myredis.GetRedisClient()
+	var bytes []byte
+	if result, _ := redisClient.Exists(myredis.ChinaData).Result(); result == 1 {
+		bytes, _ = redisClient.Get(myredis.ChinaData).Bytes()
+	} else {
+		resp, _ := http.Get("https://c.m.163.com/ug/api/wuhan/app/data/list-total")
+		bytes, _ := ioutil.ReadAll(resp.Body)
+		redisClient.Set(myredis.ChinaData, string(bytes), 30*60*time.Second)
+	}
+	//RawMessage 看作是一部分可以暂时忽略的信息，以后可以进一步去解析，但此时不用。所以，我们保留它的原始形式，还是个字节数组即可。
+	message := json.RawMessage(bytes)
+	response.Success(ctx, message)
 }
