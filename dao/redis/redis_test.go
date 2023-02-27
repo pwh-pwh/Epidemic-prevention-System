@@ -48,3 +48,11 @@ func TestKeyNil(t *testing.T) {
 	result, err := redisClient.Get("faef").Result()
 	fmt.Printf("result:%v err:%v\n", result, err)
 }
+
+func TestHasKey(t *testing.T) {
+	redisClient := redis.NewClient(&redis.Options{
+		Addr: fmt.Sprintf("%s:%d", "117.50.163.15", 6379),
+	})
+	result, err := redisClient.Exists("aa").Result()
+	fmt.Printf("result :%v err:%v", result, err)
+}

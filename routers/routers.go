@@ -15,6 +15,7 @@ func SetupRouter(mode string) *gin.Engine {
 	r.Use(middlewares.CorsMiddleware())
 	r.GET("/captcha", controller.GetCaptcha)
 	r.POST("/login", middlewares.CaptchaMiddleware(), controller.LoginHander)
+	r.GET("userInfo", middlewares.JwtAuth(""), controller.UserInfo)
 	//注册路由
 	menuGroup := r.Group("/sys/menu")
 	menuGroup.GET("/nav", middlewares.JwtAuth(""), controller.Nav)

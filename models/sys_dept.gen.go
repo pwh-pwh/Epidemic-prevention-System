@@ -5,6 +5,8 @@
 package models
 
 import (
+	"encoding"
+	"encoding/json"
 	"gorm.io/plugin/soft_delete"
 )
 
@@ -28,7 +30,18 @@ type SysDept struct {
 	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
 }
 
+func (d *SysDept) UnmarshalBinary(data []byte) error {
+	return json.Unmarshal(data, d)
+}
+
+func (d *SysDept) MarshalBinary() (data []byte, err error) {
+	return json.Marshal(d)
+}
+
 // TableName SysDept's table name
 func (*SysDept) TableName() string {
 	return TableNameSysDept
 }
+
+var _ encoding.BinaryMarshaler = new(SysDept)
+var _ encoding.BinaryUnmarshaler = new(SysDept)
