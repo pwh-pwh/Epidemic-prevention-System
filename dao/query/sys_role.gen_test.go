@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/pwh-pwh/Epidemic-prevention-System/models"
+	"log"
 	"testing"
 
 	"gorm.io/gen"
@@ -20,6 +21,17 @@ func init() {
 	err := db.AutoMigrate(&models.SysRole{})
 	if err != nil {
 		fmt.Printf("Error: AutoMigrate(&models.SysRole{}) fail: %s", err)
+	}
+}
+
+func Test_GetByIds(t *testing.T) {
+	menu := Use(db).SysMenu
+	menus, err := menu.WithContext(context.Background()).Where(menu.ID.In(1, 2, 3)).Find()
+	if err != nil {
+		log.Println(err)
+	}
+	for _, m := range menus {
+		fmt.Println(m.Perms)
 	}
 }
 

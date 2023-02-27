@@ -1,5 +1,7 @@
 package redis
 
 const (
-	CaptchaKey = "captcha"
+	CaptchaKey          = "captcha"
+	UserPre             = "User:"
+	GrantedAuthorityPre = "GrantedAuthority:"
 )

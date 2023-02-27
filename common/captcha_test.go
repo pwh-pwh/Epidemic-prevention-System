@@ -24,7 +24,7 @@ func TestRedisCaptcha_Get(t *testing.T) {
 }
 
 func TestNewBase64Img(t *testing.T) {
-	str := NewBase64Img()
+	str, _ := NewBase64Img()
 	fmt.Println(str)
 }
 
