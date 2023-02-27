@@ -26,6 +26,7 @@ type SysMenu struct {
 	Status     int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
 	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"` // 逻辑删除
 	Version    int32                 `gorm:"column:version;type:int(11);not null;default:1" json:"version"`
+	Children   []*SysMenu            `gorm:"-" json:"children"`
 }
 
 // TableName SysMenu's table name
