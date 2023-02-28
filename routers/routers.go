@@ -37,5 +37,6 @@ func SetupRouter(mode string) *gin.Engine {
 	goodsInfoGroup := r.Group("/good/info")
 	goodsInfoGroup.GET("/all", middlewares.JwtAuth("good:info:list"), controller.GetAllGoodsInfo)
 	goodsInfoGroup.GET("/total", middlewares.JwtAuth("good:info:list"), controller.GetTotalGoodsInfo)
+	goodsInfoGroup.GET("/list", middlewares.JwtAuth("good:info:list"), controller.GetListGoodsInfo)
 	return r
 }
