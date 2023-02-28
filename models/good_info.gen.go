@@ -12,7 +12,7 @@ const TableNameGoodInfo = "good_info"
 type GoodInfo struct {
 	ID         int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`      // 物资信息id
 	TypeID     int64                 `gorm:"column:type_id;type:bigint(20)" json:"type_id"`                          // 类型id
-	Name       string                `gorm:"column:name;type:varchar(50)" json:"name"`                               // 物资名称
+	Name       string                `gorm:"column:name;type:varchar(50)" json:"name" binding:"required"`            // 物资名称
 	Img        string                `gorm:"column:img;type:varchar(255)" json:"img"`                                // 图片链接
 	Size       string                `gorm:"column:size;type:varchar(50)" json:"size"`                               // 物资规格
 	Unit       string                `gorm:"column:unit;type:varchar(50)" json:"unit"`                               // 物资单位

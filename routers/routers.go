@@ -33,5 +33,8 @@ func SetupRouter(mode string) *gin.Engine {
 	aRgistGroup := r.Group("/access/register")
 	aRgistGroup.GET("/list", middlewares.JwtAuth("access:register:list"), controller.GetAccessRegisterList)
 	aRgistGroup.POST("", middlewares.JwtAuth("access:register:save"), controller.SaveAccessRegister)
+	//goodsinfo 路由
+	goodsInfoGroup := r.Group("/good/info")
+	goodsInfoGroup.GET("/all", middlewares.JwtAuth("good:info:list"), controller.GetAllGoodsInfo)
 	return r
 }
