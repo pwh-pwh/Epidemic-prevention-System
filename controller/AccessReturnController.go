@@ -12,24 +12,6 @@ import (
 	"gorm.io/gen"
 )
 
-/*
-@GetMapping("/list")
-    @PreAuthorize("hasAnyAuthority('access:return:list')")
-    public Result list(String name, String dept, String start, String end){
-        LambdaQueryWrapper<AccessReturn> wrapper = Wrappers.lambdaQuery(AccessReturn.class);
-        wrapper.like(StrUtil.isNotBlank(name), AccessReturn::getName, name);
-        wrapper.like(StrUtil.isNotBlank(dept), AccessReturn::getDept, dept);
-        if (StrUtil.isNotBlank(start) && StrUtil.isNotBlank(end)){
-            DateTime a = DateUtil.parse(start + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
-            DateTime b = DateUtil.parse(end + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
-            wrapper.between(AccessReturn::getCreateTime, a, b);
-        }
-        wrapper.orderByDesc(AccessReturn::getCreateTime);
-        Page<AccessReturn> page = accessReturnService.page(getPage(), wrapper);
-        return Result.succ(page);
-    }
-*/
-
 func AccessReturnList(ctx *gin.Context) {
 	name := ctx.Query("name")
 	dept := ctx.Query("dept")

@@ -18,13 +18,13 @@ type SysMenu struct {
 	Path       string                `gorm:"column:path;type:varchar(255)" json:"path"`                                     // 菜单URL
 	Perms      string                `gorm:"column:perms;type:varchar(255)" json:"perms"`                                   // 授权(多个用逗号分隔，如：user:list,user:create)
 	Component  string                `gorm:"column:component;type:varchar(255)" json:"component"`
-	Type       int32                 `gorm:"column:type;type:int(5);not null" json:"type"`                            // 类型     0：目录   1：菜单   2：按钮
-	Icon       string                `gorm:"column:icon;type:varchar(32)" json:"icon"`                                // 菜单图标
-	OrderNum   int32                 `gorm:"column:order_num;type:int(11)" json:"order_num"`                          // 排序
-	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
-	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
+	Type       int32                 `gorm:"column:type;type:int(5);not null" json:"type"`                           // 类型     0：目录   1：菜单   2：按钮
+	Icon       string                `gorm:"column:icon;type:varchar(32)" json:"icon"`                               // 菜单图标
+	OrderNum   int32                 `gorm:"column:order_num;type:int(11)" json:"order_num"`                         // 排序
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
 	Status     int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
-	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"` // 逻辑删除
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"` // 逻辑删除
 	Version    int32                 `gorm:"column:version;type:int(11);not null;default:1" json:"version"`
 	Children   []*SysMenu            `gorm:"-" json:"children"`
 }

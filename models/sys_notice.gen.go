@@ -18,11 +18,11 @@ type SysNotice struct {
 	Title      string                `gorm:"column:title" json:"title"`
 	Content    string                `gorm:"column:content" json:"content"`
 	Status     int32                 `gorm:"column:status;not null" json:"status"`
-	CreateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"create_by"`                      // 创建人
-	UpdateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"update_by"`                      // 创建人
-	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
-	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
-	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`           // 逻辑删除
+	CreateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"create_by"`                     // 创建人
+	UpdateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"update_by"`                     // 创建人
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除
 	Remark     string                `gorm:"column:remark" json:"remark"`
 }
 

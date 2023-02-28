@@ -22,9 +22,9 @@ type SysUser struct {
 	PhoneNumber string                `gorm:"column:phone_number;type:varchar(64)" json:"phone_number"`
 	City        string                `gorm:"column:city;type:varchar(64)" json:"city"`
 	DeptID      int64                 `gorm:"column:dept_id;type:bigint(20)" json:"dept_id"`
-	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
-	UpdateTime  LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
-	IsDelete    soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`           // 逻辑删除
+	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
+	UpdateTime  LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
+	IsDelete    soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除
 	Remark      string                `gorm:"column:remark;type:varchar(50)" json:"remark"`
 	Status      int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
 	Version     int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`

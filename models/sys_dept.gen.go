@@ -23,10 +23,10 @@ type SysDept struct {
 	Email      string                `gorm:"column:email;type:varchar(50)" json:"email"`                                  // 邮箱
 	Status     int32                 `gorm:"column:status;type:int(1);default:1" json:"status"`                           // 部门状态（1正常 0停用）
 	CreateBy   string                `gorm:"column:create_by;type:varchar(64)" json:"create_by"`                          // 创建者
-	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"`     // 创建时间
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"`      // 创建时间
 	UpdateBy   string                `gorm:"column:update_by;type:varchar(64)" json:"update_by"`                          // 更新者
-	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"`     // 更新时间
-	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`               // 逻辑删除
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"`      // 更新时间
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                       // 逻辑删除
 	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
 }
 

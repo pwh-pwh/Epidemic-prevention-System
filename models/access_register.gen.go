@@ -12,17 +12,17 @@ const TableNameAccessRegister = "access_register"
 
 // AccessRegister mapped from table <access_register>
 type AccessRegister struct {
-	ID         int64                 `gorm:"column:id;type:bigint(11);primaryKey;autoIncrement:true" json:"id"`       // 自增id
-	Name       string                `gorm:"column:name;type:varchar(50)" json:"name"`                                // 姓名
-	Phone      string                `gorm:"column:phone;type:varchar(50)" json:"phone"`                              // 手机号码
-	Type       int32                 `gorm:"column:type;type:int(1)" json:"type"`                                     // 出入类型（1：出校 0：入校）
-	Card       string                `gorm:"column:card;type:varchar(80)" json:"card"`                                // 身份证号
-	Remark     string                `gorm:"column:remark;type:varchar(255)" json:"remark"`                           // 备注
-	Dept       string                `gorm:"column:dept;type:varchar(50)" json:"dept"`                                // 部门
-	CreateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"create_by"`                      // 创建人
-	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"create_time"` // 创建时间
-	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"update_time"` // 更新时间
-	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"is_delete"`           // 逻辑删除
+	ID         int64                 `gorm:"column:id;type:bigint(11);primaryKey;autoIncrement:true" json:"id"`      // 自增id
+	Name       string                `gorm:"column:name;type:varchar(50)" json:"name"`                               // 姓名
+	Phone      string                `gorm:"column:phone;type:varchar(50)" json:"phone"`                             // 手机号码
+	Type       int32                 `gorm:"column:type;type:int(1)" json:"type"`                                    // 出入类型（1：出校 0：入校）
+	Card       string                `gorm:"column:card;type:varchar(80)" json:"card"`                               // 身份证号
+	Remark     string                `gorm:"column:remark;type:varchar(255)" json:"remark"`                          // 备注
+	Dept       string                `gorm:"column:dept;type:varchar(50)" json:"dept"`                               // 部门
+	CreateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"createBy"`                      // 创建人
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除
 }
 
 // TableName AccessRegister's table name

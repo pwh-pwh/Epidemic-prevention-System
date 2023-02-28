@@ -29,5 +29,8 @@ func SetupRouter(mode string) *gin.Engine {
 	//未回归路由
 	arGroup := r.Group("/access/return")
 	arGroup.GET("/list", middlewares.JwtAuth("access:return:list"), controller.AccessReturnList)
+	//出入登记路由
+	aRgistGroup := r.Group("/access/register")
+	aRgistGroup.GET("/list", controller.GetAccessRegisterList)
 	return r
 }
