@@ -31,10 +31,10 @@ import (
 */
 
 func AccessReturnList(ctx *gin.Context) {
-	name := ctx.Param("name")
-	dept := ctx.Param("dept")
-	start := ctx.Param("start")
-	end := ctx.Param("end")
+	name := ctx.Query("name")
+	dept := ctx.Query("dept")
+	start := ctx.Query("start")
+	end := ctx.Query("end")
 	var cd []gen.Condition
 
 	accessReturn := query.Use(mysql.DB).AccessReturn

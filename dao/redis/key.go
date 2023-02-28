@@ -1,10 +1,10 @@
 package redis
 
 const (
-	CaptchaKey          = "captcha"
-	UserPre             = "User:"
-	GrantedAuthorityPre = "GrantedAuthority:"
-	DeptPre             = "DeptId:"
-	ChinaData           = "ChinaData"
-	NoticeKey           = "SystemNotice"
+	CaptchaKey          = "go_captcha"
+	UserPre             = "go_User:"
+	GrantedAuthorityPre = "go_GrantedAuthority:"
+	DeptPre             = "go_DeptId:"
+	ChinaData           = "go_ChinaData"
+	NoticeKey           = "go_SystemNotice"
 )
