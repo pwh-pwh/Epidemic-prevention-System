@@ -7,6 +7,10 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/settings"
 )
 
+const (
+	TimeFormat = "2006-01-02 15:04:05"
+)
+
 func loadConfig() {
 	if err := settings.Init(); err != nil {
 		fmt.Printf("load config failed, err:%v\n", err)

@@ -25,6 +25,9 @@ func SetupRouter(mode string) *gin.Engine {
 	apiGroup.GET("/arlist", controller.GetAccessRegisterList)
 	//公告路由
 	noticeGroup := r.Group("/sys/notice")
-	noticeGroup.GET("", controller.GetNotice)
+	noticeGroup.GET("", middlewares.JwtAuth(""), controller.GetNotice)
+	//未回归路由
+	arGroup := r.Group("/access/return")
+	arGroup.GET("/list", middlewares.JwtAuth("access:return:list"), controller.AccessReturnList)
 	return r
 }

@@ -7,17 +7,6 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
 )
 
-/**
-@GetMapping
-    public Result getNotice(){
-        if (redisUtil.hasKey(Const.NOTICE_KEY)){
-            SysNotice sysNotice = (SysNotice) redisUtil.get(Const.NOTICE_KEY);
-            return Result.succ(sysNotice);
-        }
-        return Result.succ("暂无公告");
-    }
-*/
-
 func GetNotice(ctx *gin.Context) {
 	redisClient := myredis.GetRedisClient()
 	if exist := redisClient.Exists(myredis.NoticeKey).Val(); exist == 1 {

@@ -33,7 +33,7 @@ func ChinaData(ctx *gin.Context) {
 		bytes, _ = redisClient.Get(myredis.ChinaData).Bytes()
 	} else {
 		resp, _ := http.Get("https://c.m.163.com/ug/api/wuhan/app/data/list-total")
-		bytes, _ := ioutil.ReadAll(resp.Body)
+		bytes, _ = ioutil.ReadAll(resp.Body)
 		redisClient.Set(myredis.ChinaData, string(bytes), 30*60*time.Second)
 	}
 	//RawMessage 看作是一部分可以暂时忽略的信息，以后可以进一步去解析，但此时不用。所以，我们保留它的原始形式，还是个字节数组即可。
