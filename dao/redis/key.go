@@ -6,4 +6,5 @@ const (
 	GrantedAuthorityPre = "GrantedAuthority:"
 	DeptPre             = "DeptId:"
 	ChinaData           = "ChinaData"
+	NoticeKey           = "SystemNotice"
 )

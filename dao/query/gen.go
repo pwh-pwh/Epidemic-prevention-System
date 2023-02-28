@@ -29,6 +29,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		SysDept:        newSysDept(db, opts...),
 		SysLoginInfo:   newSysLoginInfo(db, opts...),
 		SysMenu:        newSysMenu(db, opts...),
+		SysNotice:      newSysNotice(db, opts...),
 		SysOperateLog:  newSysOperateLog(db, opts...),
 		SysRole:        newSysRole(db, opts...),
 		SysRoleMenu:    newSysRoleMenu(db, opts...),
@@ -51,6 +52,7 @@ type Query struct {
 	SysDept        sysDept
 	SysLoginInfo   sysLoginInfo
 	SysMenu        sysMenu
+	SysNotice      sysNotice
 	SysOperateLog  sysOperateLog
 	SysRole        sysRole
 	SysRoleMenu    sysRoleMenu
@@ -74,6 +76,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		SysDept:        q.SysDept.clone(db),
 		SysLoginInfo:   q.SysLoginInfo.clone(db),
 		SysMenu:        q.SysMenu.clone(db),
+		SysNotice:      q.SysNotice.clone(db),
 		SysOperateLog:  q.SysOperateLog.clone(db),
 		SysRole:        q.SysRole.clone(db),
 		SysRoleMenu:    q.SysRoleMenu.clone(db),
@@ -104,6 +107,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		SysDept:        q.SysDept.replaceDB(db),
 		SysLoginInfo:   q.SysLoginInfo.replaceDB(db),
 		SysMenu:        q.SysMenu.replaceDB(db),
+		SysNotice:      q.SysNotice.replaceDB(db),
 		SysOperateLog:  q.SysOperateLog.replaceDB(db),
 		SysRole:        q.SysRole.replaceDB(db),
 		SysRoleMenu:    q.SysRoleMenu.replaceDB(db),
@@ -124,6 +128,7 @@ type queryCtx struct {
 	SysDept        *sysDeptDo
 	SysLoginInfo   *sysLoginInfoDo
 	SysMenu        *sysMenuDo
+	SysNotice      *sysNoticeDo
 	SysOperateLog  *sysOperateLogDo
 	SysRole        *sysRoleDo
 	SysRoleMenu    *sysRoleMenuDo
@@ -144,6 +149,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		SysDept:        q.SysDept.WithContext(ctx),
 		SysLoginInfo:   q.SysLoginInfo.WithContext(ctx),
 		SysMenu:        q.SysMenu.WithContext(ctx),
+		SysNotice:      q.SysNotice.WithContext(ctx),
 		SysOperateLog:  q.SysOperateLog.WithContext(ctx),
 		SysRole:        q.SysRole.WithContext(ctx),
 		SysRoleMenu:    q.SysRoleMenu.WithContext(ctx),
