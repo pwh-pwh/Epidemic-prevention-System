@@ -34,4 +34,9 @@ func InitAll() {
 		return
 	}
 	initRedisCatpcha()
+	InitOss(settings.Conf.OssConfig)
+}
+
+func InitOss(cfg *settings.OssConfig) {
+	Oss = cfg
 }

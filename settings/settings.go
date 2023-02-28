@@ -19,6 +19,12 @@ type AppConfig struct {
 	*MySQLConfig `mapstructure:"mysql"`
 	*RedisConfig `mapstructure:"redis"`
 	*JwtConfig   `mapstructure:"jwt"`
+	*OssConfig   `mapstructure:"oss"`
+}
+
+type OssConfig struct {
+	AccessKeyID     string
+	AccessKeySecret string
 }
 
 type MySQLConfig struct {
