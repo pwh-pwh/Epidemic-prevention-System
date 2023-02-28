@@ -6,7 +6,9 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/common"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/query"
+	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
+	"github.com/pwh-pwh/Epidemic-prevention-System/service"
 	"github.com/pwh-pwh/Epidemic-prevention-System/utils"
 	"github.com/pwh-pwh/Epidemic-prevention-System/vo"
 	"gorm.io/gen"
@@ -50,4 +52,21 @@ func GetAccessRegisterList(ctx *gin.Context) {
 		Records: result,
 		Total:   count,
 	})
+}
+
+func SaveAccessRegister(ctx *gin.Context) {
+	ar := new(models.AccessRegister)
+	usernameI, _ := ctx.Get("username")
+	username := usernameI.(string)
+	ar.CreateBy = username
+	if err := ctx.ShouldBindJSON(ar); err != nil {
+		response.Fail(ctx, err.Error())
+		return
+	}
+	flag := service.AddAccessRegister(ar)
+	if flag {
+		response.Success(ctx, "登记成功")
+	} else {
+		response.Fail(ctx, "登记失败")
+	}
 }

@@ -13,12 +13,12 @@ const TableNameAccessRegister = "access_register"
 // AccessRegister mapped from table <access_register>
 type AccessRegister struct {
 	ID         int64                 `gorm:"column:id;type:bigint(11);primaryKey;autoIncrement:true" json:"id"`      // 自增id
-	Name       string                `gorm:"column:name;type:varchar(50)" json:"name"`                               // 姓名
-	Phone      string                `gorm:"column:phone;type:varchar(50)" json:"phone"`                             // 手机号码
+	Name       string                `gorm:"column:name;type:varchar(50)" json:"name" binding:"required"`            // 姓名
+	Phone      string                `gorm:"column:phone;type:varchar(50)" json:"phone" binding:"required"`          // 手机号码
 	Type       int32                 `gorm:"column:type;type:int(1)" json:"type"`                                    // 出入类型（1：出校 0：入校）
-	Card       string                `gorm:"column:card;type:varchar(80)" json:"card"`                               // 身份证号
+	Card       string                `gorm:"column:card;type:varchar(80)" json:"card" binding:"required"`            // 身份证号
 	Remark     string                `gorm:"column:remark;type:varchar(255)" json:"remark"`                          // 备注
-	Dept       string                `gorm:"column:dept;type:varchar(50)" json:"dept"`                               // 部门
+	Dept       string                `gorm:"column:dept;type:varchar(50)" json:"dept" binding:"required"`            // 部门
 	CreateBy   string                `gorm:"column:create_by;type:varchar(50)" json:"createBy"`                      // 创建人
 	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
 	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
