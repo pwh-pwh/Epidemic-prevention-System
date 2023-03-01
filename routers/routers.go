@@ -45,5 +45,8 @@ func SetupRouter(mode string) *gin.Engine {
 	goodsTypeGroup := r.Group("/good/type")
 	goodsTypeGroup.GET("", middlewares.JwtAuth("good:type:list"), controller.GetSimpleListGoodsType)
 	goodsTypeGroup.GET("/list", middlewares.JwtAuth("good:type:list"), controller.GetListGoodsType)
+	//物资出入库路由
+	goodsStockGroup := r.Group("/good/stock")
+	goodsStockGroup.GET("/list", middlewares.JwtAuth("good:stock:list"), controller.GetListGoodsStock)
 	return r
 }
