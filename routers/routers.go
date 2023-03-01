@@ -39,7 +39,8 @@ func SetupRouter(mode string) *gin.Engine {
 	goodsInfoGroup.GET("/total", middlewares.JwtAuth("good:info:list"), controller.GetTotalGoodsInfo)
 	goodsInfoGroup.GET("/list", middlewares.JwtAuth("good:info:list"), controller.GetListGoodsInfo)
 	goodsInfoGroup.POST("", middlewares.JwtAuth("good:info:save"), controller.SaveGoodsInfo)
-
+	goodsInfoGroup.PUT("", middlewares.JwtAuth("good:info:update"), controller.UpdateGoodsInfo)
+	goodsInfoGroup.DELETE("", middlewares.JwtAuth("good:info:delete"), controller.DeleteGoodsInfo)
 	//goodstype 路由
 	goodsTypeGroup := r.Group("/good/type")
 	goodsTypeGroup.GET("", middlewares.JwtAuth("good:type:list"), controller.GetSimpleListGoodsType)
