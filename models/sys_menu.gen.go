@@ -13,7 +13,7 @@ const TableNameSysMenu = "sys_menu"
 // SysMenu mapped from table <sys_menu>
 type SysMenu struct {
 	ID         int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`
-	ParentID   int64                 `gorm:"column:parent_id;type:bigint(20)" json:"parent_id"`                             // 父菜单ID，一级菜单为0
+	ParentID   int64                 `gorm:"column:parent_id;type:bigint(20)" json:"parentId"`                              // 父菜单ID，一级菜单为0
 	Name       string                `gorm:"column:name;type:varchar(64);not null;uniqueIndex:name,priority:1" json:"name"` // 菜单名
 	Path       string                `gorm:"column:path;type:varchar(255)" json:"path"`                                     // 菜单URL
 	Perms      string                `gorm:"column:perms;type:varchar(255)" json:"perms"`                                   // 授权(多个用逗号分隔，如：user:list,user:create)

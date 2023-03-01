@@ -6,6 +6,7 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/common"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/query"
+	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
 	"github.com/pwh-pwh/Epidemic-prevention-System/utils"
 	"github.com/pwh-pwh/Epidemic-prevention-System/vo"
@@ -48,56 +49,44 @@ func GetListGoodsStock(ctx *gin.Context) {
 	})
 }
 
-/*
-@GetMapping("/list")
-    @PreAuthorize("hasAnyAuthority('good:stock:list')")
-    public Result list(String accept, Integer operateType, String start, String end) {
-        LambdaQueryWrapper<GoodStock> wrapper = Wrappers.lambdaQuery(GoodStock.class);
-        wrapper.like(StrUtil.isNotBlank(accept), GoodStock::getAccept, accept);
-        wrapper.eq(operateType != null, GoodStock::getOperateType, operateType);
-        if (StrUtil.isNotBlank(start) && StrUtil.isNotBlank(end)){
-            DateTime a = DateUtil.parse(start + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
-            DateTime b = DateUtil.parse(end + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
-            wrapper.between(GoodStock::getCreateTime, a, b);
-        }
-        wrapper.orderByDesc(GoodStock::getCreateTime);
-        Page<GoodStock> page = goodStockService.page(getPage(), wrapper);
-        return Result.succ(page);
-    }
-
-    @PostMapping
-    @Log(title = "物资库存", businessType = "物资出入库")
-    @PreAuthorize("hasAnyAuthority('good:stock:operate')")
-    public Result save(@Validated @RequestBody GoodStock goodStock, Principal principal) {
-        List<GoodDto> list = goodStock.getList();
-        List<GoodStock> goodStockList = new ArrayList<>();
-        list.forEach(goodDto -> {
-            GoodStock stock = new GoodStock();
-            stock.setCreateBy(principal.getName());
-            stock.setAccept(goodStock.getAccept());
-            stock.setGoodName(goodDto.getGoodName());
-            stock.setGoodNum(goodDto.getGoodNum());
-            stock.setGoodSize(goodDto.getGoodSize());
-            stock.setPeopleName(goodStock.getPeopleName());
-            stock.setPeoplePhone(goodStock.getPeoplePhone());
-            stock.setOperateType(goodStock.getOperateType());
-            stock.setRemark(goodStock.getRemark());
-            goodStockList.add(stock);
-            GoodInfo goodInfo = goodInfoService.getById(goodDto.getId());
-            int res;
-            if (goodStock.getOperateType() == 0) {
-                res = goodInfo.getTotal() + goodDto.getGoodNum();
-            } else {
-                res = goodInfo.getTotal() - goodDto.getGoodNum();
-            }
-            goodInfo.setTotal(res);
-            goodInfoService.updateById(goodInfo);
-        });
-        boolean batch = goodStockService.saveBatch(goodStockList);
-        if (batch) {
-            return Result.succ("操作成功！");
-        } else {
-            return Result.fail("操作失败！");
-        }
-    }
-*/
+func SaveGoodsStock(ctx *gin.Context) {
+	usernameI, _ := ctx.Get("username")
+	username := usernameI.(string)
+	goodsStock := new(models.GoodStock)
+	goodStockList := make([]*models.GoodStock, 0)
+	err := ctx.ShouldBindJSON(goodsStock)
+	if err != nil {
+		response.Fail(ctx, err.Error())
+		return
+	}
+	goodsInfoQ := query.Use(mysql.DB).GoodInfo
+	for _, item := range goodsStock.List {
+		st := new(models.GoodStock)
+		st.CreateBy = username
+		st.Accept = goodsStock.Accept
+		st.GoodName = item.GoodName
+		st.GoodNum = item.GoodNum
+		st.GoodSize = item.GoodSize
+		st.PeopleName = goodsStock.PeopleName
+		st.PeoplePhone = goodsStock.PeoplePhone
+		st.OperateType = goodsStock.OperateType
+		st.Remark = goodsStock.Remark
+		goodStockList = append(goodStockList, st)
+		var res int32
+		goodsInfo, _ := goodsInfoQ.WithContext(context.Background()).Where(goodsInfoQ.ID.Eq(item.Id)).Take()
+		if goodsStock.OperateType == 0 {
+			res = goodsInfo.Total + item.GoodNum
+		} else {
+			res = goodsInfo.Total - item.GoodNum
+		}
+		goodsInfo.Total = res
+		_, _ = goodsInfoQ.WithContext(context.Background()).Where(goodsInfoQ.ID.Eq(goodsInfo.ID)).Updates(goodsInfo)
+	}
+	goodsStockQ := query.Use(mysql.DB).GoodStock
+	err = goodsStockQ.WithContext(context.Background()).Create(goodStockList...)
+	if err != nil {
+		response.Fail(ctx, "操作失败！")
+		return
+	}
+	response.Success(ctx, "操作成功！")
+}

@@ -48,5 +48,7 @@ func SetupRouter(mode string) *gin.Engine {
 	//物资出入库路由
 	goodsStockGroup := r.Group("/good/stock")
 	goodsStockGroup.GET("/list", middlewares.JwtAuth("good:stock:list"), controller.GetListGoodsStock)
+	//good:stock:operate
+	goodsStockGroup.POST("", middlewares.JwtAuth("good:stock:operate"), controller.SaveGoodsStock)
 	return r
 }

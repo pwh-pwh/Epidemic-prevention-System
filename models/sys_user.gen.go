@@ -19,7 +19,7 @@ type SysUser struct {
 	Password    string                `gorm:"column:password;type:varchar(64)" json:"password"`
 	Nickname    string                `gorm:"column:nickname;type:varchar(64)" json:"nickname"` // 昵称
 	Avatar      string                `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
-	PhoneNumber string                `gorm:"column:phone_number;type:varchar(64)" json:"phone_number"`
+	PhoneNumber string                `gorm:"column:phone_number;type:varchar(64)" json:"phoneNumber"`
 	City        string                `gorm:"column:city;type:varchar(64)" json:"city"`
 	DeptID      int64                 `gorm:"column:dept_id;type:bigint(20)" json:"dept_id"`
 	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间

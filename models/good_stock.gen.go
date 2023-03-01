@@ -5,6 +5,7 @@
 package models
 
 import (
+	"github.com/pwh-pwh/Epidemic-prevention-System/dto"
 	"gorm.io/plugin/soft_delete"
 )
 
@@ -15,17 +16,18 @@ type GoodStock struct {
 	ID          int64                 `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"`      // 出入库信息id
 	Accept      string                `gorm:"column:accept;type:varchar(60)" json:"accept"`                           // 去向
 	CreateBy    string                `gorm:"column:create_by;type:varchar(50)" json:"createBy"`                      // 操作人
-	GoodNum     int32                 `gorm:"column:good_num;type:int(11)" json:"good_num"`                           // 物资数量
-	GoodSize    string                `gorm:"column:good_size;type:varchar(50)" json:"good_size"`                     // 物资规格
-	GoodName    string                `gorm:"column:good_name;type:varchar(50)" json:"good_name"`                     // 物资名
-	PeopleName  string                `gorm:"column:people_name;type:varchar(50)" json:"people_name"`                 // 联系人
-	PeoplePhone string                `gorm:"column:people_phone;type:varchar(50)" json:"people_phone"`               // 联系人电话
-	OperateType int32                 `gorm:"column:operate_type;type:int(1);default:1" json:"operate_type"`          // 操作类型
+	GoodNum     int32                 `gorm:"column:good_num;type:int(11)" json:"goodNum"`                            // 物资数量
+	GoodSize    string                `gorm:"column:good_size;type:varchar(50)" json:"goodSize"`                      // 物资规格
+	GoodName    string                `gorm:"column:good_name;type:varchar(50)" json:"goodName"`                      // 物资名
+	PeopleName  string                `gorm:"column:people_name;type:varchar(50)" json:"peopleName"`                  // 联系人
+	PeoplePhone string                `gorm:"column:people_phone;type:varchar(50)" json:"peoplePhone"`                // 联系人电话
+	OperateType int32                 `gorm:"column:operate_type;type:int(1);default:1" json:"operateType"`           // 操作类型
 	Remark      string                `gorm:"column:remark;type:varchar(255)" json:"remark"`                          // 备注
 	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
 	UpdateTime  LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
 	IsDelete    soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除
 	Version     int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`                   // 乐观锁
+	List        []*dto.GoodsDto       `gorm:"-:all" json:"list"`
 }
 
 // TableName GoodStock's table name
