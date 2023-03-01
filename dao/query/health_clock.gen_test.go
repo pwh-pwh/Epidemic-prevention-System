@@ -23,6 +23,12 @@ func init() {
 	}
 }
 
+func TestSql(t *testing.T) {
+	var count int
+	db.Debug().Raw("select count(id) from health_clock where to_days(create_time) = to_days(now()) and username = ?", "admin").Scan(&count)
+	fmt.Println(count)
+}
+
 func Test_healthClockQuery(t *testing.T) {
 	healthClock := newHealthClock(db)
 	healthClock = *healthClock.As(healthClock.TableName())

@@ -21,8 +21,6 @@ func SetupRouter(mode string) *gin.Engine {
 	//注册路由
 	menuGroup := r.Group("/sys/menu")
 	menuGroup.GET("/nav", middlewares.JwtAuth(""), controller.Nav)
-	apiGroup := r.Group("/api/v1")
-	apiGroup.GET("/arlist", controller.GetAccessRegisterList)
 	//公告路由
 	noticeGroup := r.Group("/sys/notice")
 	noticeGroup.GET("", middlewares.JwtAuth(""), controller.GetNotice)
@@ -53,5 +51,10 @@ func SetupRouter(mode string) *gin.Engine {
 	goodsStockGroup.GET("/list", middlewares.JwtAuth("good:stock:list"), controller.GetListGoodsStock)
 	//good:stock:operate
 	goodsStockGroup.POST("", middlewares.JwtAuth("good:stock:operate"), controller.SaveGoodsStock)
+	///health/clock
+	healthClockGroup := r.Group("/health/clock")
+	healthClockGroup.GET("/list", middlewares.JwtAuth("health:clock:list"), controller.GetListHealthClock)
+	healthClockGroup.GET("", middlewares.JwtAuth(""), controller.CheckHealthClock)
+	healthClockGroup.POST("", middlewares.JwtAuth("health:clock:save"), controller.SaveHealthClock)
 	return r
 }
