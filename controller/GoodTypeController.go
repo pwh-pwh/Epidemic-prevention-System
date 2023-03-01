@@ -5,11 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/query"
+	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
 	"github.com/pwh-pwh/Epidemic-prevention-System/utils"
 	"github.com/pwh-pwh/Epidemic-prevention-System/vo"
 	"gorm.io/gen"
 	"strconv"
+	"strings"
 )
 
 func GetSimpleListGoodsType(ctx *gin.Context) {
@@ -57,4 +59,59 @@ func GetListGoodsType(ctx *gin.Context) {
 		Records: data,
 		Total:   count,
 	})
+}
+
+func SaveGoodsType(ctx *gin.Context) {
+	usernameI, _ := ctx.Get("username")
+	username := usernameI.(string)
+	goodsType := new(models.GoodType)
+	err := ctx.ShouldBindJSON(goodsType)
+	if err != nil {
+		response.Fail(ctx, err.Error())
+		return
+	}
+	goodsType.CreateBy = username
+	goodsTypeQ := query.Use(mysql.DB).GoodType
+	err = goodsTypeQ.WithContext(context.Background()).Create(goodsType)
+	if err != nil {
+		response.Fail(ctx, "添加类型失败！")
+		return
+	}
+	response.Success(ctx, "添加类型成功！")
+}
+
+func UpdateGoodsType(ctx *gin.Context) {
+	usernameI, _ := ctx.Get("username")
+	username := usernameI.(string)
+	goodsType := new(models.GoodType)
+	err := ctx.ShouldBindJSON(goodsType)
+	if err != nil {
+		response.Fail(ctx, err.Error())
+		return
+	}
+	goodsType.CreateBy = username
+	goodsTypeQ := query.Use(mysql.DB).GoodType
+	_, err = goodsTypeQ.WithContext(context.Background()).Select(goodsTypeQ.Type, goodsTypeQ.Status, goodsTypeQ.CreateBy, goodsTypeQ.Remark, goodsTypeQ.OrderNum).Where(goodsTypeQ.ID.Eq(goodsType.ID)).Updates(goodsType)
+	if err != nil {
+		response.Fail(ctx, "修改类型失败！")
+		return
+	}
+	response.Success(ctx, "修改类型成功！")
+}
+
+func DeleteGoodsType(ctx *gin.Context) {
+	idsS := ctx.Query("ids")
+	split := strings.Split(idsS, ",")
+	var ids []int64
+	for _, s := range split {
+		parseInt, _ := strconv.ParseInt(s, 10, 64)
+		ids = append(ids, parseInt)
+	}
+	goodsTypeQ := query.Use(mysql.DB).GoodType
+	_, err := goodsTypeQ.WithContext(context.Background()).Where(goodsTypeQ.ID.In(ids...)).Delete()
+	if err != nil {
+		response.Fail(ctx, "删除类型失败！")
+		return
+	}
+	response.Success(ctx, "删除类型成功！")
 }
