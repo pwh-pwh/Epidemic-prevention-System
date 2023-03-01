@@ -56,8 +56,13 @@ func SetupRouter(mode string) *gin.Engine {
 	healthClockGroup.GET("/list", middlewares.JwtAuth("health:clock:list"), controller.GetListHealthClock)
 	healthClockGroup.GET("", middlewares.JwtAuth(""), controller.CheckHealthClock)
 	healthClockGroup.POST("", middlewares.JwtAuth("health:clock:save"), controller.SaveHealthClock)
-	//dept route
+	// dept route
 	deptGroup := r.Group("/sys/dept")
 	deptGroup.GET("/list/:flag", controller.ListDept)
+	// health/report route
+	healthReportGroup := r.Group("/health/report")
+	healthReportGroup.GET("", middlewares.JwtAuth(""), controller.CheckHealthReport)
+	healthReportGroup.GET("/list", middlewares.JwtAuth("health:report:list"), controller.ListHealthReport)
+	healthReportGroup.POST("", middlewares.JwtAuth("health:report:save"), controller.SaveHealthReport)
 	return r
 }

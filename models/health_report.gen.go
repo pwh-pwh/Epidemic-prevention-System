@@ -10,7 +10,7 @@ const TableNameHealthReport = "health_report"
 type HealthReport struct {
 	ID          int64     `gorm:"column:id;type:bigint(11);primaryKey;autoIncrement:true" json:"id"`      // 自增id
 	Username    string    `gorm:"column:username;type:varchar(50)" json:"username"`                       // 用户名
-	DeptID      int64     `gorm:"column:dept_id;type:bigint(11)" json:"dept_id"`                          // 部门id
+	DeptID      int64     `gorm:"column:dept_id;type:bigint(11)" json:"deptId"`                           // 部门id
 	PhoneNumber string    `gorm:"column:phone_number;type:varchar(50)" json:"phoneNumber"`                // 手机号
 	Img3        string    `gorm:"column:img3;type:varchar(255)" json:"img3"`                              // 核酸报告
 	Img2        string    `gorm:"column:img2;type:varchar(255)" json:"img2"`                              // 行程码

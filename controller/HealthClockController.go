@@ -22,7 +22,7 @@ func GetListHealthClock(ctx *gin.Context) {
 	authorityList := auListI.([]string)
 	flag := false
 	for _, item := range authorityList {
-		if item == "teacher" {
+		if item == "ROLE_teacher" {
 			flag = true
 		}
 	}
