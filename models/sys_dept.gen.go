@@ -14,20 +14,21 @@ const TableNameSysDept = "sys_dept"
 
 // SysDept mapped from table <sys_dept>
 type SysDept struct {
-	DeptID     int64                 `gorm:"column:dept_id;type:bigint(20);primaryKey;autoIncrement:true" json:"dept_id"` // 部门id
-	ParentID   int64                 `gorm:"column:parent_id;type:bigint(20)" json:"parent_id"`                           // 父部门id
-	DeptName   string                `gorm:"column:dept_name;type:varchar(30)" json:"dept_name"`                          // 部门名称
-	OrderNum   int32                 `gorm:"column:order_num;type:int(4)" json:"order_num"`                               // 显示顺序
-	Leader     string                `gorm:"column:leader;type:varchar(20)" json:"leader"`                                // 负责人
-	Phone      string                `gorm:"column:phone;type:varchar(11)" json:"phone"`                                  // 联系电话
-	Email      string                `gorm:"column:email;type:varchar(50)" json:"email"`                                  // 邮箱
-	Status     int32                 `gorm:"column:status;type:int(1);default:1" json:"status"`                           // 部门状态（1正常 0停用）
-	CreateBy   string                `gorm:"column:create_by;type:varchar(64)" json:"create_by"`                          // 创建者
-	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"`      // 创建时间
-	UpdateBy   string                `gorm:"column:update_by;type:varchar(64)" json:"update_by"`                          // 更新者
-	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"`      // 更新时间
-	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                       // 逻辑删除
+	DeptID     int64                 `gorm:"column:dept_id;type:bigint(20);primaryKey;autoIncrement:true" json:"deptId"` // 部门id
+	ParentID   int64                 `gorm:"column:parent_id;type:bigint(20)" json:"parentId"`                           // 父部门id
+	DeptName   string                `gorm:"column:dept_name;type:varchar(30)" json:"deptName"`                          // 部门名称
+	OrderNum   int32                 `gorm:"column:order_num;type:int(4)" json:"orderNum"`                               // 显示顺序
+	Leader     string                `gorm:"column:leader;type:varchar(20)" json:"leader"`                               // 负责人
+	Phone      string                `gorm:"column:phone;type:varchar(11)" json:"phone"`                                 // 联系电话
+	Email      string                `gorm:"column:email;type:varchar(50)" json:"email"`                                 // 邮箱
+	Status     int32                 `gorm:"column:status;type:int(1);default:1" json:"status"`                          // 部门状态（1正常 0停用）
+	CreateBy   string                `gorm:"column:create_by;type:varchar(64)" json:"createBy"`                          // 创建者
+	CreateTime LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"`     // 创建时间
+	UpdateBy   string                `gorm:"column:update_by;type:varchar(64)" json:"updateBy"`                          // 更新者
+	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"`     // 更新时间
+	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                      // 逻辑删除
 	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
+	Children   []*SysDept            `gorm:"-:all" json:"children"`
 }
 
 func (d *SysDept) UnmarshalBinary(data []byte) error {
