@@ -15,7 +15,7 @@ func SetupRouter(mode string) *gin.Engine {
 	r.Use(middlewares.CorsMiddleware())
 	r.GET("/captcha", controller.GetCaptcha)
 	r.POST("/login", middlewares.CaptchaMiddleware(), controller.LoginHander)
-	r.GET("userInfo", middlewares.JwtAuth(""), controller.UserInfo)
+	r.GET("/userInfo", middlewares.JwtAuth(""), controller.UserInfo)
 	r.GET("/news", middlewares.JwtAuth(""), controller.News)
 	r.GET("/chinaData", middlewares.JwtAuth(""), controller.ChinaData)
 	r.POST("/upload", middlewares.JwtAuth(""), controller.Upload)
