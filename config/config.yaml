@@ -23,9 +23,9 @@ jwt:
 
 
 redis:
-  host: "117.50.163.15"
+  host: "47.113.146.123"
   port: 6379
-  password: ""
+  password: "mypassword"
   db: 0
   pool_size: 100
 
