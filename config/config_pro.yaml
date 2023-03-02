@@ -32,3 +32,11 @@ redis:
 oss:
   AccessKeyID: LTAI5t8gKijcQuJ2TD1wPbJ4
   AccessKeySecret: WSEzMEwMI82rIANcst2sLvgjj4nWt8
+
+code:
+  studentCode: stu
+  teacherCode: teac
+  serviceCode: serv
+  studentRole: 3
+  teacherRole: 8
+  serviceRole: 10

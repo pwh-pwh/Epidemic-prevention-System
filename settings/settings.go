@@ -20,6 +20,7 @@ type AppConfig struct {
 	*RedisConfig `mapstructure:"redis"`
 	*JwtConfig   `mapstructure:"jwt"`
 	*OssConfig   `mapstructure:"oss"`
+	*CodeConfig  `mapstructure:"code"`
 }
 
 type OssConfig struct {
@@ -53,6 +54,23 @@ type RedisConfig struct {
 	MinIdleConns int    `mapstructure:"min_idle_conns"`
 }
 
+type CodeConfig struct {
+	StudentCode string `yaml:"studentCode"`
+	TeacherCode string `yaml:"teacherCode"`
+	ServiceCode string `yaml:"serviceCode"`
+	StudentRole int    `yaml:"studentRole"`
+	TeacherRole int    `yaml:"studentRole"`
+	ServiceRole int    `yaml:"studentRole"`
+}
+
+/*
+   studentCode: stu
+   teacherCode: teac
+   serviceCode: serv
+   studentRole: 3
+   teacherRole: 8
+   serviceRole: 10
+*/
 //
 //type LogConfig struct {
 //	Level      string `mapstructure:"level"`
@@ -63,8 +81,8 @@ type RedisConfig struct {
 //}
 
 func Init() error {
+	//todo 增加命令行参数解析
 	viper.SetConfigFile("./config/config.yaml")
-
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("夭寿啦~配置文件被人修改啦...")

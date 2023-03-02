@@ -8,8 +8,12 @@ import (
 )
 
 const (
-	TimeFormat  = "2006-01-02 15:04:05"
-	RoleTeacher = "ROLE_teacher"
+	TimeFormat   = "2006-01-02 15:04:05"
+	RoleTeacher  = "ROLE_teacher"
+	ROLE_STUDENT = 2
+	ROLE_TEACHER = 1
+	ROLE_SERVICE = 0
+	DEFAULT_IMG  = "https://geektutu.com/post/geecache/geecache.jpg"
 )
 
 func loadConfig() {
@@ -36,8 +40,13 @@ func InitAll() {
 	}
 	initRedisCatpcha()
 	InitOss(settings.Conf.OssConfig)
+	InitCode(settings.Conf.CodeConfig)
 }
 
 func InitOss(cfg *settings.OssConfig) {
 	Oss = cfg
+}
+
+func InitCode(cfg *settings.CodeConfig) {
+	CodeConfig = cfg
 }

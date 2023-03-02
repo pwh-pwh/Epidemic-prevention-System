@@ -2,12 +2,14 @@ package user_service
 
 import (
 	"context"
+	"github.com/pwh-pwh/Epidemic-prevention-System/common"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/query"
 	myredis "github.com/pwh-pwh/Epidemic-prevention-System/dao/redis"
 	"github.com/pwh-pwh/Epidemic-prevention-System/logic"
 	"github.com/pwh-pwh/Epidemic-prevention-System/models"
 	"github.com/pwh-pwh/Epidemic-prevention-System/service/menu_service"
+	"github.com/pwh-pwh/Epidemic-prevention-System/utils"
 	"log"
 	"strings"
 	"time"
@@ -65,4 +67,24 @@ func GetUserAuthorityList(username string) []string {
 		}
 	}
 	return authorityList
+}
+
+func RegisterUser(username, password, registerCode, phoneNumber string, roleType, deptId int) bool {
+	roleId := utils.SwitchRole(roleType, registerCode)
+	if roleId != -1 {
+		user := new(models.SysUser)
+		user.Username = username
+		user.Password = utils.Md5Crypt(password)
+		user.Avatar = common.DEFAULT_IMG
+		user.DeptID = int64(deptId)
+		user.PhoneNumber = phoneNumber
+		user.Status = 1
+		_ = query.Use(mysql.DB).SysUser.WithContext(context.Background()).Create(user)
+		userRole := new(models.SysUserRole)
+		userRole.UserID = user.ID
+		userRole.RoleID = int64(roleId)
+		_ = query.Use(mysql.DB).SysUserRole.WithContext(context.Background()).Create(userRole)
+		return true
+	}
+	return false
 }
