@@ -7,10 +7,10 @@ machine_id: 1
 
 
 mysql:
-  host: "47.113.146.123"
+  host: "localhost"
   port: 3306
-  user: "chenadmin"
-  password: "Chenadmin0."
+  user: "pwh"
+  password: "123456"
   dbname: "system_admin"
   max_open_conns: 200
   max_idle_conns: 50
@@ -23,7 +23,7 @@ jwt:
 
 
 redis:
-  host: "47.113.146.123"
+  host: "localhost"
   port: 6379
   password: "mypassword"
   db: 0
