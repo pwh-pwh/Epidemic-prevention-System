@@ -6,6 +6,7 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/response"
 	"github.com/pwh-pwh/Epidemic-prevention-System/service/user_service"
 	"net/http"
+	"strings"
 )
 
 func JwtAuth(sau string) gin.HandlerFunc {
@@ -33,9 +34,16 @@ func JwtAuth(sau string) gin.HandlerFunc {
 			authorityList := user_service.GetUserAuthorityList(claims.UserName)
 			ctx.Set("auList", authorityList)
 			flag := false
+			split := strings.Split(sau, ",")
+			// hasAnyAuthority 有任意一条满足即可
 			for _, au := range authorityList {
-				if au == sau {
-					flag = true
+				for _, s := range split {
+					if s == au {
+						flag = true
+						break
+					}
+				}
+				if flag {
 					break
 				}
 			}

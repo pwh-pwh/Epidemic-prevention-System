@@ -65,5 +65,10 @@ func SetupRouter(mode string) *gin.Engine {
 	healthReportGroup.GET("", middlewares.JwtAuth(""), controller.CheckHealthReport)
 	healthReportGroup.GET("/list", middlewares.JwtAuth("health:report:list"), controller.ListHealthReport)
 	healthReportGroup.POST("", middlewares.JwtAuth("health:report:save"), controller.SaveHealthReport)
+	// leave/apply route
+	leaveApplyGroup := r.Group("/leave/apply")
+	leaveApplyGroup.GET("/list", middlewares.JwtAuth("leave:apply:list,leave:record:list"), controller.GetListLeaveApply)
+	leaveApplyGroup.POST("", middlewares.JwtAuth("leave:apply:save"), controller.SaveLeaveApply)
+	leaveApplyGroup.PUT("", middlewares.JwtAuth("leave:apply:update,leave:record:examine"), controller.UpdateLeaveApply)
 	return r
 }

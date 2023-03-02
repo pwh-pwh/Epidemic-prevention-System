@@ -36,7 +36,7 @@ func ListHealthReport(ctx *gin.Context) {
 	authorityList := auListI.([]string)
 	flag := false
 	for _, item := range authorityList {
-		if item == "ROLE_teacher" {
+		if item == common.RoleTeacher {
 			flag = true
 		}
 	}

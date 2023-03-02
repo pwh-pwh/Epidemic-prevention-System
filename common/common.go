@@ -8,7 +8,8 @@ import (
 )
 
 const (
-	TimeFormat = "2006-01-02 15:04:05"
+	TimeFormat  = "2006-01-02 15:04:05"
+	RoleTeacher = "ROLE_teacher"
 )
 
 func loadConfig() {

@@ -3,6 +3,7 @@ package controller
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/pwh-pwh/Epidemic-prevention-System/common"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/query"
 	"github.com/pwh-pwh/Epidemic-prevention-System/models"
@@ -22,7 +23,7 @@ func GetListHealthClock(ctx *gin.Context) {
 	authorityList := auListI.([]string)
 	flag := false
 	for _, item := range authorityList {
-		if item == "ROLE_teacher" {
+		if item == common.RoleTeacher {
 			flag = true
 		}
 	}
