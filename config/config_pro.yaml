@@ -1,0 +1,34 @@
+name: "coderpwh"
+mode: "dev"
+port: 8081
+version: "v0.0.1"
+start_time: "2022-04-09"
+machine_id: 1
+
+
+mysql:
+  host: "47.113.146.123"
+  port: 3306
+  user: "chenadmin"
+  password: "Chenadmin0."
+  dbname: "system_admin"
+  max_open_conns: 200
+  max_idle_conns: 50
+  debug: true
+
+jwt:
+  header: Authorization
+  expire: 3600
+  key: asdhkmytoysfwhgdnkyklyutldwyiram
+
+
+redis:
+  host: "47.113.146.123"
+  port: 6379
+  password: "mypassword"
+  db: 0
+  pool_size: 100
+
+oss:
+  AccessKeyID: LTAI5t8gKijcQuJ2TD1wPbJ4
+  AccessKeySecret: WSEzMEwMI82rIANcst2sLvgjj4nWt8
