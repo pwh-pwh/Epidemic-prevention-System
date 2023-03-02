@@ -7,4 +7,6 @@ const (
 	DeptPre             = "DeptId:"
 	ChinaData           = "ChinaData"
 	NoticeKey           = "SystemNotice"
+	HISTORY_DAY_LIST    = "ChinaDayList"
+	VaccineTopData      = "VaccineTopData"
 )

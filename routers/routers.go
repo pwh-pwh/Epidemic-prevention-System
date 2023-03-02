@@ -16,8 +16,16 @@ func SetupRouter(mode string) *gin.Engine {
 	r.GET("/captcha", controller.GetCaptcha)
 	r.POST("/login", middlewares.CaptchaMiddleware(), controller.LoginHander)
 	r.GET("/userInfo", middlewares.JwtAuth(""), controller.UserInfo)
+	//news 相关接口
 	r.GET("/news", middlewares.JwtAuth(""), controller.News)
 	r.GET("/chinaData", middlewares.JwtAuth(""), controller.ChinaData)
+	r.GET("/riskarea", middlewares.JwtAuth(""), controller.GetRiskArea)
+	r.GET("/history", middlewares.JwtAuth(""), controller.GetHistory)
+	r.GET("/infiniteNews", middlewares.JwtAuth(""), controller.InfiniteNews)
+	r.GET("/vaccineTopData", middlewares.JwtAuth(""), controller.VaccineTopData)
+	r.GET("/chinaVaccineTrendData", middlewares.JwtAuth(""), controller.ChinaVaccineTrendData)
+	r.GET("/rumor", middlewares.JwtAuth(""), controller.Rumor)
+
 	r.POST("/upload", middlewares.JwtAuth(""), controller.Upload)
 	//注册路由
 	menuGroup := r.Group("/sys/menu")
