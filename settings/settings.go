@@ -1,6 +1,7 @@
 package settings
 
 import (
+	"flag"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -81,8 +82,20 @@ type CodeConfig struct {
 //}
 
 func Init() error {
-	//todo 增加命令行参数解析
-	viper.SetConfigFile("./config/config.yaml")
+	mode := flag.String("mode", "dev", "设置运行模式:dev pro local")
+	flag.Parse()
+	filePath := "./config/config.yaml"
+	switch *mode {
+	case "dev":
+		filePath = "./config/config.yaml"
+	case "pro":
+		filePath = "./config/config_pro.yaml"
+	case "local":
+		filePath = "./config/config_local.yaml"
+	default:
+		filePath = "./config/config.yaml"
+	}
+	viper.SetConfigFile(filePath)
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("夭寿啦~配置文件被人修改啦...")
