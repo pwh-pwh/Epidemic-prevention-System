@@ -78,5 +78,8 @@ func SetupRouter(mode string) *gin.Engine {
 	leaveApplyGroup.GET("/list", middlewares.JwtAuth("leave:apply:list,leave:record:list"), controller.GetListLeaveApply)
 	leaveApplyGroup.POST("", middlewares.JwtAuth("leave:apply:save"), controller.SaveLeaveApply)
 	leaveApplyGroup.PUT("", middlewares.JwtAuth("leave:apply:update,leave:record:examine"), controller.UpdateLeaveApply)
+	// /monitor/redis
+	r.GET("/monitor/redis", middlewares.JwtAuth("monitor:redis:list"), controller.GetRedisInfo)
+
 	return r
 }
