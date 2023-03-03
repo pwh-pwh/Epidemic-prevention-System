@@ -68,6 +68,9 @@ func SetupRouter(mode string) *gin.Engine {
 	// dept route
 	deptGroup := r.Group("/sys/dept")
 	deptGroup.GET("/list/:flag", controller.ListDept)
+	deptGroup.DELETE("/:id", middlewares.JwtAuth("sys:dept:delete"), controller.DeleteDeptById)
+	deptGroup.PUT("", middlewares.JwtAuth("sys:dept:update"), controller.UpdateDept)
+	deptGroup.POST("", middlewares.JwtAuth("sys:dept:save"), controller.SaveDept)
 	// health/report route
 	healthReportGroup := r.Group("/health/report")
 	healthReportGroup.GET("", middlewares.JwtAuth(""), controller.CheckHealthReport)
