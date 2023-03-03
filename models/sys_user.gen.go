@@ -21,7 +21,7 @@ type SysUser struct {
 	Avatar      string                `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
 	PhoneNumber string                `gorm:"column:phone_number;type:varchar(64)" json:"phoneNumber"`
 	City        string                `gorm:"column:city;type:varchar(64)" json:"city"`
-	DeptID      int64                 `gorm:"column:dept_id;type:bigint(20)" json:"dept_id"`
+	DeptID      int64                 `gorm:"column:dept_id;type:bigint(20)" json:"deptId"`
 	CreateTime  LocalTime             `gorm:"column:create_time;type:datetime;autoCreateTime:true" json:"createTime"` // 创建时间
 	UpdateTime  LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
 	IsDelete    soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除

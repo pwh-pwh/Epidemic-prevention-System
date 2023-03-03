@@ -118,5 +118,18 @@ func SetupRouter(mode string) *gin.Engine {
 	roleGroup.GET("/list", middlewares.JwtAuth("sys:role:list"), controller.ListRole)
 	roleGroup.POST("", middlewares.JwtAuth("sys:role:save"), controller.AddRole)
 	roleGroup.PUT("", middlewares.JwtAuth("sys:role:update"), controller.EditRole)
+
+	// /sys/user
+	userGroup := r.Group("/sys/user")
+	userGroup.POST("/avatar", middlewares.JwtAuth(""), controller.Avatar)
+	userGroup.GET("/updatePassword", middlewares.JwtAuth("sys:user:update"), controller.UpdatePassword)
+	userGroup.POST("/updateInfo", middlewares.JwtAuth("sys:user:update"), controller.UpdateInfo)
+	userGroup.POST("/reset", middlewares.JwtAuth("sys:user:repass"), controller.ResetPwd)
+	userGroup.POST("/userRole/:id", middlewares.JwtAuth("sys:user:role"), controller.ApplyUserRole)
+	userGroup.DELETE("", middlewares.JwtAuth("sys:user:delete"), controller.DeleteUesr)
+	userGroup.PUT("", middlewares.JwtAuth("sys:user:update"), controller.UpdateUser)
+	userGroup.POST("", middlewares.JwtAuth("sys:user:save"), controller.AddUser)
+	userGroup.GET("/list", middlewares.JwtAuth("sys:user:list"), controller.ListUser)
+	userGroup.GET("/info/:id", controller.Info)
 	return r
 }

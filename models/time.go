@@ -25,6 +25,10 @@ func (t LocalTime) MarshalJSON() ([]byte, error) {
 }
 
 func (t *LocalTime) UnmarshalJSON(data []byte) (err error) {
+	if string(data) == "null" {
+		*t = LocalTime{}
+		return nil
+	}
 	now, err := time.ParseInLocation(`"`+timeFormat+`"`, string(data), time.Local)
 	*t = LocalTime(now)
 	return
@@ -41,6 +45,9 @@ func (t LocalTime) Local() time.Time {
 
 func (t LocalTime) Value() (driver.Value, error) {
 	var ti = time.Time(t)
+	if ti.IsZero() {
+		return nil, nil
+	}
 	return ti, nil
 }
 

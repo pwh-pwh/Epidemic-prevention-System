@@ -8,12 +8,13 @@ import (
 )
 
 const (
-	TimeFormat   = "2006-01-02 15:04:05"
-	RoleTeacher  = "ROLE_teacher"
-	ROLE_STUDENT = 2
-	ROLE_TEACHER = 1
-	ROLE_SERVICE = 0
-	DEFAULT_IMG  = "https://geektutu.com/post/geecache/geecache.jpg"
+	TimeFormat       = "2006-01-02 15:04:05"
+	RoleTeacher      = "ROLE_teacher"
+	ROLE_STUDENT     = 2
+	ROLE_TEACHER     = 1
+	ROLE_SERVICE     = 0
+	DEFAULT_IMG      = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+	DEFAULT_PASSWORD = "123456"
 )
 
 func loadConfig() {

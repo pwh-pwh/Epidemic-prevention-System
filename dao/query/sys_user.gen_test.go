@@ -23,6 +23,25 @@ func init() {
 	}
 }
 
+func Test_ZoreUp(t *testing.T) {
+	userQ := Use(db).SysUser
+	u := new(models.SysUser)
+	userQ.WithContext(context.Background()).Create(u)
+}
+
+func Test_at(t *testing.T) {
+	userQ := Use(db).SysUser
+	u := new(models.SysUser)
+	u.ID = 6
+	userQ.WithContext(context.Background()).Debug().Select(userQ.ALL).Where(userQ.ID.Eq(6)).Updates(u)
+}
+
+func Test_u(t *testing.T) {
+	u := new(models.SysUser)
+	u.ID = 6
+	db.Debug().Model(u).Select("*").Omit("create_time").Where("id=?", 6).Updates(u)
+}
+
 func Test_sysUserQuery(t *testing.T) {
 	sysUser := newSysUser(db)
 	sysUser = *sysUser.As(sysUser.TableName())

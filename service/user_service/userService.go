@@ -132,3 +132,8 @@ func ClearUserAuthorityByRoleId(roleId int64) {
 	}
 	redisClient.Del(usernameList...)
 }
+
+func ClearUserAuthority(username string) {
+	redisClient := myredis.GetRedisClient()
+	redisClient.Del(myredis.GrantedAuthorityPre + username)
+}
