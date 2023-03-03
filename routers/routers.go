@@ -30,6 +30,10 @@ func SetupRouter(mode string) *gin.Engine {
 	//注册路由
 	menuGroup := r.Group("/sys/menu")
 	menuGroup.GET("/nav", middlewares.JwtAuth(""), controller.Nav)
+	menuGroup.GET("/list", middlewares.JwtAuth("sys:menu:list"), controller.ListMenu)
+	menuGroup.DELETE("/:id", middlewares.JwtAuth("sys:menu:delete"), controller.DeleteMenu)
+	menuGroup.POST("", middlewares.JwtAuth("sys:menu:save"), controller.SaveMenu)
+	menuGroup.PUT("", middlewares.JwtAuth("sys:menu:update"), controller.EditMenu)
 	//公告路由
 	noticeGroup := r.Group("/sys/notice")
 	noticeGroup.GET("", middlewares.JwtAuth(""), controller.GetNotice)

@@ -88,3 +88,27 @@ func RegisterUser(username, password, registerCode, phoneNumber string, roleType
 	}
 	return false
 }
+
+//SELECT DISTINCT
+//            su.*
+//        FROM
+//            sys_user_role ur
+//        LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+//        LEFT JOIN sys_user su ON ur.user_id = su.id
+//        WHERE
+//            rm.menu_id = #{menuId}
+//SELECT `sys_user`.`username` FROM `sys_user_role` LEFT JOIN `sys_role_menu` ON `sys_user_role`.`role_id` = `sys_role_menu`.`role_id`
+//LEFT JOIN `sys_user` ON `sys_user`.`id` = `sys_user_role`.`user_id` WHERE `sys_role_menu`.`menu_id` = 25
+func ClearUserAuthorityByMenuId(id int64) {
+	sysUserQ := query.Use(mysql.DB).SysUser
+	sysUserRoleQ := query.Use(mysql.DB).SysUserRole
+	roleMenuQ := query.Use(mysql.DB).SysRoleMenu
+	var usernameList []string
+	sysUserRoleQ.WithContext(context.Background()).Distinct(sysUserQ.Username).Select(sysUserQ.Username).LeftJoin(roleMenuQ, sysUserRoleQ.RoleID.EqCol(roleMenuQ.RoleID)).
+		LeftJoin(sysUserQ, sysUserQ.ID.EqCol(sysUserRoleQ.UserID)).Where(roleMenuQ.MenuID.Eq(id)).Scan(&usernameList)
+	redisClient := myredis.GetRedisClient()
+	for i, s := range usernameList {
+		usernameList[i] = myredis.GrantedAuthorityPre + s
+	}
+	redisClient.Del(usernameList...)
+}

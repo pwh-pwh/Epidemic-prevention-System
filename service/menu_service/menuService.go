@@ -16,6 +16,16 @@ func ListByIds(ids []int64) ([]*models.SysMenu, error) {
 	sysMenu := query.Use(mysql.DB).SysMenu
 	return sysMenu.WithContext(context.Background()).Where(sysMenu.ID.In(ids...)).Find()
 }
+func GetMenu() ([]*models.SysMenu, error) {
+	sysMenuQ := query.Use(mysql.DB).SysMenu
+	menus, err := sysMenuQ.WithContext(context.Background()).Where().Order(sysMenuQ.OrderNum).Find()
+	if err != nil {
+		log.Printf("listbyids err:%v\n", err)
+		return nil, err
+	}
+	treeMenu := buildTreeMenu(menus)
+	return treeMenu, nil
+}
 
 func GetUserNav(username string) ([]*dto.NavMenu, error) {
 	sysUser := new(models.SysUser)
