@@ -11,7 +11,7 @@ type SysLoginInfo struct {
 	ID            int64     `gorm:"column:id;type:bigint(20);primaryKey;autoIncrement:true" json:"id"` // 访问ID
 	Username      string    `gorm:"column:username;type:varchar(50)" json:"username"`                  // 用户账号
 	IP            string    `gorm:"column:ip;type:varchar(50)" json:"ip"`                              // 登录IP地址
-	LoginLocation string    `gorm:"column:login_location;type:varchar(100)" json:"login_location"`     // 登录地点
+	LoginLocation string    `gorm:"column:login_location;type:varchar(100)" json:"loginLocation"`      // 登录地点
 	Browser       string    `gorm:"column:browser;type:varchar(50)" json:"browser"`                    // 浏览器类型
 	Os            string    `gorm:"column:os;type:varchar(50)" json:"os"`                              // 操作系统
 	Status        int32     `gorm:"column:status;type:int(1);default:1" json:"status"`                 // 登录状态（0成功 1失败）

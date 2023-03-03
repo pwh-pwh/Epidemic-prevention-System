@@ -89,5 +89,11 @@ func SetupRouter(mode string) *gin.Engine {
 	registerGroup := r.Group("/register")
 	registerGroup.POST("", middlewares.CaptchaMiddleware(), controller.Register)
 	registerGroup.GET("/deptList", controller.DeptList)
+
+	// /sys/loginInfo
+	loginInfoGroup := r.Group("/sys/loginInfo")
+	loginInfoGroup.POST("", middlewares.JwtAuth("sys:login:clear"), controller.ClearLoginInfo)
+	loginInfoGroup.DELETE("", middlewares.JwtAuth("sys:login:delete"), controller.DeleteLoginInfo)
+	loginInfoGroup.GET("/list", middlewares.JwtAuth("sys:login:list"), controller.ListLoginInfo)
 	return r
 }

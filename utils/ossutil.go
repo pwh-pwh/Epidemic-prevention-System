@@ -33,3 +33,5 @@ func UploadFile(file *multipart.FileHeader) (string, error) {
 	}
 	return "https://go-pj-oss.oss-cn-guangzhou.aliyuncs.com/" + rPath, nil
 }
+
+//TODO 接入图床
