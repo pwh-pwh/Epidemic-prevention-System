@@ -112,3 +112,23 @@ func ClearUserAuthorityByMenuId(id int64) {
 	}
 	redisClient.Del(usernameList...)
 }
+
+/*
+List<SysUser> sysUserList = list(new QueryWrapper<SysUser>()
+                .inSql("id", "select user_id from sys_user_role where role_id = " + roleId));
+        sysUserList.forEach(user -> clearUserAuthority(user.getUsername()));
+*/
+func ClearUserAuthorityByRoleId(roleId int64) {
+	ctx := context.Background()
+	sysUserQ := query.Use(mysql.DB).SysUser
+	sysUserRoleQ := query.Use(mysql.DB).SysUserRole
+	var usernameList []string
+	urDo := sysUserRoleQ.WithContext(ctx).Where(sysUserRoleQ.RoleID.Eq(roleId))
+	sysUserQ.WithContext(ctx).Select(sysUserQ.Username).Where(
+		sysUserQ.WithContext(ctx).Columns(sysUserQ.ID).In(urDo)).Scan(&usernameList)
+	redisClient := myredis.GetRedisClient()
+	for i, s := range usernameList {
+		usernameList[i] = myredis.GrantedAuthorityPre + s
+	}
+	redisClient.Del(usernameList...)
+}

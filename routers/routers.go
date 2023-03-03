@@ -110,5 +110,13 @@ func SetupRouter(mode string) *gin.Engine {
 	opLogGroup.POST("", middlewares.JwtAuth("monitor:operate:clear"), controller.ClearOpLog)
 	opLogGroup.GET("/list", middlewares.JwtAuth("monitor:operate:list"), controller.ListOpLog)
 	opLogGroup.DELETE("", middlewares.JwtAuth("monitor:operate:delete"), controller.DeleteOpLog)
+
+	// /sys/role
+	roleGroup := r.Group("/sys/role")
+	roleGroup.DELETE("", middlewares.JwtAuth("sys:role:delete"), controller.DeleteRole)
+	roleGroup.GET("/info/:id", middlewares.JwtAuth(""), controller.InfoRole)
+	roleGroup.GET("/list", middlewares.JwtAuth("sys:role:list"), controller.ListRole)
+	roleGroup.POST("", middlewares.JwtAuth("sys:role:save"), controller.AddRole)
+	roleGroup.PUT("", middlewares.JwtAuth("sys:role:update"), controller.EditRole)
 	return r
 }

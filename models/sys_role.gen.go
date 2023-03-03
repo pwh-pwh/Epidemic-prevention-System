@@ -21,6 +21,7 @@ type SysRole struct {
 	Status     int32                 `gorm:"column:status;type:int(5);not null" json:"status"`
 	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"` // 逻辑删除
 	Version    int32                 `gorm:"column:version;type:int(11);default:1" json:"version"`
+	MenuIds    []int64               `gorm:"-:all" json:"menuIds"`
 }
 
 // TableName SysRole's table name
