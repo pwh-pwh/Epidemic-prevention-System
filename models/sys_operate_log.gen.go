@@ -13,11 +13,11 @@ type SysOperateLog struct {
 	BusinessType  string    `gorm:"column:business_type;type:varchar(50)" json:"businessType"`         // 业务类型
 	Method        string    `gorm:"column:method;type:varchar(100)" json:"method"`                     // 方法名称
 	RequestMethod string    `gorm:"column:request_method;type:varchar(10)" json:"requestMethod"`       // 请求方式
-	OperURL       string    `gorm:"column:oper_url;type:varchar(255)" json:"oper_url"`                 // 请求URL
-	OperIP        string    `gorm:"column:oper_ip;type:varchar(128)" json:"oper_ip"`                   // 主机地址
+	OperURL       string    `gorm:"column:oper_url;type:varchar(255)" json:"operUrl"`                  // 请求URL
+	OperIP        string    `gorm:"column:oper_ip;type:varchar(128)" json:"operIp"`                    // 主机地址
 	OperLocation  string    `gorm:"column:oper_location;type:varchar(255)" json:"operLocation"`        // 操作地点
 	OperParam     string    `gorm:"column:oper_param;type:varchar(2000)" json:"operParam"`             // 请求参数
-	OperName      string    `gorm:"column:oper_name;type:varchar(50)" json:"oper_name"`                // 操作人
+	OperName      string    `gorm:"column:oper_name;type:varchar(50)" json:"operName"`                 // 操作人
 	JSONResult    string    `gorm:"column:json_result;type:varchar(2000)" json:"jsonResult"`           // 返回参数
 	Status        int32     `gorm:"column:status;type:int(1);default:1" json:"status"`                 // 操作状态（1正常 0异常）
 	ErrorMsg      string    `gorm:"column:error_msg;type:varchar(2000)" json:"errorMsg"`               // 错误消息
