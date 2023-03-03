@@ -24,6 +24,7 @@ type SysNotice struct {
 	UpdateTime LocalTime             `gorm:"column:update_time;type:datetime;autoUpdateTime:true" json:"updateTime"` // 更新时间
 	IsDelete   soft_delete.DeletedAt `gorm:"column:is_delete;type:int(1);softDelete:flag" json:"-"`                  // 逻辑删除
 	Remark     string                `gorm:"column:remark" json:"remark"`
+	NoticeId   string                `gorm:"-:all" json:"noticeId"`
 }
 
 func (n *SysNotice) UnmarshalBinary(data []byte) error {

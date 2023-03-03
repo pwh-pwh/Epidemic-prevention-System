@@ -37,6 +37,11 @@ func SetupRouter(mode string) *gin.Engine {
 	//公告路由
 	noticeGroup := r.Group("/sys/notice")
 	noticeGroup.GET("", middlewares.JwtAuth(""), controller.GetNotice)
+	noticeGroup.GET("/list", middlewares.JwtAuth("monitor:notice:list"), controller.ListNotice)
+	noticeGroup.POST("", middlewares.JwtAuth("monitor:notice:save"), controller.SaveNotice)
+	noticeGroup.PUT("", middlewares.JwtAuth("monitor:notice:update"), controller.UpdateNotice)
+	noticeGroup.DELETE("", middlewares.JwtAuth("monitor:notice:delete"), controller.DeleteNotice)
+	noticeGroup.GET("/:id", middlewares.JwtAuth("monitor:notice:set"), controller.SetNotice)
 	//未回归路由
 	arGroup := r.Group("/access/return")
 	arGroup.GET("/list", middlewares.JwtAuth("access:return:list"), controller.AccessReturnList)
