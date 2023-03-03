@@ -5,6 +5,7 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/mysql"
 	"github.com/pwh-pwh/Epidemic-prevention-System/dao/redis"
 	"github.com/pwh-pwh/Epidemic-prevention-System/settings"
+	"time"
 )
 
 const (
@@ -16,6 +17,8 @@ const (
 	DEFAULT_IMG      = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
 	DEFAULT_PASSWORD = "123456"
 )
+
+var StartTime time.Time
 
 func loadConfig() {
 	if err := settings.Init(); err != nil {

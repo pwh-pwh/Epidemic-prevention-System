@@ -5,9 +5,11 @@ import (
 	"github.com/pwh-pwh/Epidemic-prevention-System/common"
 	"github.com/pwh-pwh/Epidemic-prevention-System/routers"
 	"github.com/pwh-pwh/Epidemic-prevention-System/settings"
+	"time"
 )
 
 func main() {
+	common.StartTime = time.Now()
 	common.InitAll()
 	// 注册路由
 	r := routers.SetupRouter(settings.Conf.Mode)
