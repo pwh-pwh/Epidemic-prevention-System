@@ -12,6 +12,7 @@ func SetupRouter(mode string) *gin.Engine {
 	}
 	r := gin.New()
 	r.Use(middlewares.Recover)
+	r.Use(middlewares.CommonLogInterceptor())
 	r.Use(middlewares.CorsMiddleware())
 	r.GET("/captcha", controller.GetCaptcha)
 	r.POST("/login", middlewares.CaptchaMiddleware(), controller.LoginHander)
@@ -103,7 +104,7 @@ func SetupRouter(mode string) *gin.Engine {
 	// /sys/loginInfo
 	loginInfoGroup := r.Group("/sys/loginInfo")
 	loginInfoGroup.POST("", middlewares.JwtAuth("sys:login:clear"), controller.ClearLoginInfo)
-	loginInfoGroup.DELETE("", middlewares.JwtAuth("sys:login:delete"), controller.DeleteLoginInfo)
+	loginInfoGroup.DELETE("", middlewares.JwtAuth("sys:login:delete"), middlewares.NewMetaHandler().SetTitle("登陆日志").ToHFunc(), controller.DeleteLoginInfo)
 	loginInfoGroup.GET("/list", middlewares.JwtAuth("sys:login:list"), controller.ListLoginInfo)
 
 	// /sys/operateLog
