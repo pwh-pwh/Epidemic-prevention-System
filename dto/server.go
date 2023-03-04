@@ -68,7 +68,7 @@ type Serve struct {
 func GetServer() *Serve {
 	server := Serve{}
 	server.Cpu = GetCpu()
-	fmt.Println(server.Cpu)
+	//fmt.Println(server.Cpu)
 	server.Mem = GetMem()
 	server.Sys = GetSys()
 	server.SysFiles = GetDirInfo()
@@ -162,12 +162,12 @@ func GetSys() *Sys {
 	osName, _ := os.Hostname()
 	dir, _ := os.Getwd()
 	ip := GetLocalIp()
-	fmt.Printf("arch:%v, goos:%v, hostname:%v\n", goarch, goos, osName)
-	fmt.Printf("homedir:%v, ip:%v\n", dir, ip)
+	//fmt.Printf("arch:%v, goos:%v, hostname:%v\n", goarch, goos, osName)
+	//fmt.Printf("homedir:%v, ip:%v\n", dir, ip)
 	sys := Sys{
 		OsArch:       goarch,
 		ComputerName: osName,
-		OsName:       osName,
+		OsName:       goos,
 		UserDir:      dir,
 		ComputerIp:   ip,
 	}
