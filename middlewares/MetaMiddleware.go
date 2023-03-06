@@ -27,6 +27,13 @@ func (m MetaHandler) SetType(typeS string) MetaHandler {
 	}
 }
 
+func (m MetaHandler) SetMethod(method string) MetaHandler {
+	return func(context *gin.Context) {
+		m(context)
+		context.Set("method", method)
+	}
+}
+
 func (m MetaHandler) Set(key, value string) MetaHandler {
 	return func(context *gin.Context) {
 		m(context)

@@ -123,7 +123,7 @@ func ClearUserAuthorityByRoleId(roleId int64) {
 	sysUserQ := query.Use(mysql.DB).SysUser
 	sysUserRoleQ := query.Use(mysql.DB).SysUserRole
 	var usernameList []string
-	urDo := sysUserRoleQ.WithContext(ctx).Where(sysUserRoleQ.RoleID.Eq(roleId))
+	urDo := sysUserRoleQ.WithContext(ctx).Select(sysUserRoleQ.UserID).Where(sysUserRoleQ.RoleID.Eq(roleId))
 	sysUserQ.WithContext(ctx).Select(sysUserQ.Username).Where(
 		sysUserQ.WithContext(ctx).Columns(sysUserQ.ID).In(urDo)).Scan(&usernameList)
 	redisClient := myredis.GetRedisClient()
