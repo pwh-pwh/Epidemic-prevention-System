@@ -84,6 +84,7 @@ func GetDirInfo() []*DirInfo {
 		//fmt.Println(p)
 		d.DirName = p.Mountpoint
 		d.SysTypeName = p.Fstype
+		d.TypeName = p.Device
 		usage, _ := disk.Usage(p.Mountpoint)
 		gb := float64(usage.Total) / float64(1024*1024*1024)
 		d.Total = fmt.Sprintf("%v GB", gb)
