@@ -154,22 +154,22 @@ func setUploginInfo(r *gin.Engine) {
 func setUpOpLog(r *gin.Engine) {
 	opLogGroup := r.Group("/sys/operateLog", middlewares.NewMetaHandler().SetTitle("操作日志管理").ToHFunc())
 	opLogGroup.POST("", middlewares.JwtAuth("monitor:operate:clear"),
-		middlewares.NewMetaHandler().SetTitle("清除日志").SetMethod("ClearOpLog").ToHFunc(), controller.ClearOpLog)
+		middlewares.NewMetaHandler().SetType("清除日志").SetMethod("ClearOpLog").ToHFunc(), controller.ClearOpLog)
 	opLogGroup.GET("/list", middlewares.JwtAuth("monitor:operate:list"), controller.ListOpLog)
 	opLogGroup.DELETE("", middlewares.JwtAuth("monitor:operate:delete"),
-		middlewares.NewMetaHandler().SetTitle("删除日志").SetMethod("DeleteOpLog").ToHFunc(), controller.DeleteOpLog)
+		middlewares.NewMetaHandler().SetType("删除日志").SetMethod("DeleteOpLog").ToHFunc(), controller.DeleteOpLog)
 }
 
 func setUpRole(r *gin.Engine) {
 	roleGroup := r.Group("/sys/role", middlewares.NewMetaHandler().SetTitle("角色管理").ToHFunc())
 	roleGroup.DELETE("", middlewares.JwtAuth("sys:role:delete"),
-		middlewares.NewMetaHandler().SetTitle("删除角色").SetMethod("DeleteRole").ToHFunc(), controller.DeleteRole)
+		middlewares.NewMetaHandler().SetType("删除角色").SetMethod("DeleteRole").ToHFunc(), controller.DeleteRole)
 	roleGroup.GET("/info/:id", middlewares.JwtAuth(""), controller.InfoRole)
 	roleGroup.GET("/list", middlewares.JwtAuth("sys:role:list"), controller.ListRole)
 	roleGroup.POST("", middlewares.JwtAuth("sys:role:save"),
-		middlewares.NewMetaHandler().SetTitle("添加角色").SetMethod("AddRole").ToHFunc(), controller.AddRole)
+		middlewares.NewMetaHandler().SetType("添加角色").SetMethod("AddRole").ToHFunc(), controller.AddRole)
 	roleGroup.PUT("", middlewares.JwtAuth("sys:role:update"),
-		middlewares.NewMetaHandler().SetTitle("修改角色").SetMethod("EditRole").ToHFunc(), controller.EditRole)
+		middlewares.NewMetaHandler().SetType("修改角色").SetMethod("EditRole").ToHFunc(), controller.EditRole)
 }
 
 func setUpUser(r *gin.Engine) {
@@ -198,11 +198,11 @@ func setUpNotice(r *gin.Engine) {
 	noticeGroup.GET("", middlewares.JwtAuth(""), controller.GetNotice)
 	noticeGroup.GET("/list", middlewares.JwtAuth("monitor:notice:list"), controller.ListNotice)
 	noticeGroup.POST("", middlewares.JwtAuth("monitor:notice:save"),
-		middlewares.NewMetaHandler().SetTitle("新建公告").SetMethod("SaveNotice").ToHFunc(), controller.SaveNotice)
+		middlewares.NewMetaHandler().SetType("新建公告").SetMethod("SaveNotice").ToHFunc(), controller.SaveNotice)
 	noticeGroup.PUT("", middlewares.JwtAuth("monitor:notice:update"),
-		middlewares.NewMetaHandler().SetTitle("更新公告").SetMethod("UpdateNotice").ToHFunc(), controller.UpdateNotice)
+		middlewares.NewMetaHandler().SetType("更新公告").SetMethod("UpdateNotice").ToHFunc(), controller.UpdateNotice)
 	noticeGroup.DELETE("", middlewares.JwtAuth("monitor:notice:delete"),
-		middlewares.NewMetaHandler().SetTitle("删除公告").SetMethod("DeleteNotice").ToHFunc(), controller.DeleteNotice)
+		middlewares.NewMetaHandler().SetType("删除公告").SetMethod("DeleteNotice").ToHFunc(), controller.DeleteNotice)
 	noticeGroup.GET("/:id", middlewares.JwtAuth("monitor:notice:set"), controller.SetNotice)
 }
 

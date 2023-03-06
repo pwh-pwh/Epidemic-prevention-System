@@ -49,6 +49,10 @@ func logT(ctx *gin.Context) {
 	if ctx.Request.Body != nil {
 		bodyBytes, _ = ioutil.ReadAll(ctx.Request.Body)
 	}
+	//文件上传忽略
+	if len(bodyBytes) > 1024*1024 {
+		return
+	}
 	ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 	opLog.OperParam = string(bodyBytes)
 	var blw bodyLogWriter
@@ -56,11 +60,11 @@ func logT(ctx *gin.Context) {
 	ctx.Writer = blw
 	ctx.Next()
 	strBody := blw.bodyBuf.String()
-	//文件上传忽略
+	//文件下载忽略
 	if len(strBody) > 1024*1024 {
 		return
 	}
-	opLog.OperParam = strBody
+	opLog.JSONResult = strBody
 	usernameI, ise := ctx.Get("username")
 	if ise {
 		opLog.OperName = usernameI.(string)
