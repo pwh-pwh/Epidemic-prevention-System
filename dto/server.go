@@ -115,10 +115,12 @@ func GetGoInfo() *Go {
 		text := sc.Text()
 		//fmt.Println(text)
 		if strings.Contains(text, "GOVERSION") {
-			g.Version = text[9:len(text)]
+			index := strings.Index(text, "=")
+			g.Version = text[index+1 : len(text)]
 		}
 		if strings.Contains(text, "GOROOT") {
-			g.Home = text[6:len(text)]
+			index := strings.Index(text, "=")
+			g.Home = text[index+1 : len(text)]
 		}
 	}
 	g.Name = "go"
