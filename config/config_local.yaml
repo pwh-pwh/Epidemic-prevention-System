@@ -11,9 +11,10 @@ mysql:
   port: 3306
   user: "chenadmin"
   password: "Chenadmin0."
+  dbname: "system_admin"
   max_open_conns: 200
   max_idle_conns: 50
-  debug: true
+  debug: false
 
 jwt:
   header: Authorization
