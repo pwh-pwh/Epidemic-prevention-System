@@ -9,7 +9,6 @@ machine_id: 1
 mysql:
   host: "localhost"
   port: 3306
-  user: "pwh"
   user: "chenadmin"
   password: "Chenadmin0."
   max_open_conns: 200
