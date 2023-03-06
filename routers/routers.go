@@ -3,7 +3,10 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/pwh-pwh/Epidemic-prevention-System/controller"
+	_ "github.com/pwh-pwh/Epidemic-prevention-System/docs"
 	"github.com/pwh-pwh/Epidemic-prevention-System/middlewares"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func SetupRouter(mode string) *gin.Engine {
@@ -19,6 +22,7 @@ func SetupRouter(mode string) *gin.Engine {
 	r.GET("/userInfo", middlewares.JwtAuth(""), controller.UserInfo)
 	r.POST("/upload", middlewares.JwtAuth(""), controller.Upload)
 	r.POST("/logout", controller.Logout)
+	r.GET("/swagger-ui/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	//news 相关接口
 	setUpNews(r)
 	//注册路由

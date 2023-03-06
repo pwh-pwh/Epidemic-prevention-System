@@ -8,6 +8,11 @@ import (
 	"time"
 )
 
+// @title 校园疫情管理系统
+// @version 1.0
+// @description 校园疫情管理系统
+// @contact.name coderpwh
+// @contact.email plmoknpwh@163.com
 func main() {
 	common.StartTime = time.Now()
 	common.InitAll()
