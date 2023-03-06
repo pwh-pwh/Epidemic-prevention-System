@@ -10,8 +10,8 @@ mysql:
   host: "localhost"
   port: 3306
   user: "pwh"
-  password: "123456"
-  dbname: "system_admin"
+  user: "chenadmin"
+  password: "Chenadmin0."
   max_open_conns: 200
   max_idle_conns: 50
   debug: true
