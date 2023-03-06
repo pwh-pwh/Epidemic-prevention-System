@@ -1,0 +1,13 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "校园疫情管理系统",
+        "title": "校园疫情管理系统",
+        "contact": {
+            "name": "coderpwh",
+            "email": "plmoknpwh@163.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {}
+}
