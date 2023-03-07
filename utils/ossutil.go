@@ -11,6 +11,10 @@ import (
 )
 
 func UploadFile(file *multipart.FileHeader) (string, error) {
+	return uploadFileOss(file)
+}
+
+func uploadFileOss(file *multipart.FileHeader) (string, error) {
 	client, err := oss.New("oss-cn-guangzhou.aliyuncs.com", common.Oss.AccessKeyID, common.Oss.AccessKeySecret)
 	if err != nil {
 		log.Printf("new client error:%v", err)
