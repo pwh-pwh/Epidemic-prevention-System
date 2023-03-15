@@ -1,3 +1,12 @@
+definitions:
+  response.response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
 info:
   contact:
     email: plmoknpwh@163.com
@@ -5,5 +14,145 @@ info:
   description: 校园疫情管理系统
   title: 校园疫情管理系统
   version: "1.0"
-paths: {}
+paths:
+  /access/register/list:
+    get:
+      description: 可按type按name或start,end,根据createTime排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: GetAccessRegisterList接口
+      tags:
+      - ccessRegister相关接口
+  /access/return/list:
+    get:
+      description: 可按type按name按dept或start,end,根据createTime排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: AccessReturnList接口
+      tags:
+      - ccessReturn相关接口
+  /good/info/list:
+    get:
+      description: 可按typeId按name按status查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: GetListGoodsInfo接口
+      tags:
+      - goodInfo相关接口
+  /good/stock/list:
+    get:
+      description: 可按accept按operateType按dept或start,end,根据createTime排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: GetListGoodsStock接口
+      tags:
+      - goodStock相关接口
+  /good/type/list:
+    get:
+      description: 可按type按createBy按status,根据orderNum排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: GetListGoodsType接口
+      tags:
+      - goodType相关接口
+  /health/report/list:
+    get:
+      description: 可按type按username按deptId或start,end,根据createTime排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: ListHealthReport
+      tags:
+      - healthReport相关接口
+  /leave/apply/list:
+    get:
+      description: 可按status按username按deptId或start,end,根据createTime排序查询列表接口
+      parameters:
+      - description: jwt
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.response'
+      security:
+      - ApiKeyAuth: []
+      summary: GetListLeaveApply接口
+      tags:
+      - leaveApply相关接口
 swagger: "2.0"

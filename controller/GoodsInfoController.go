@@ -57,6 +57,15 @@ func GetTotalGoodsInfo(ctx *gin.Context) {
 	})
 }
 
+// GetListGoodsInfo GetListGoodsInfo接口
+// @Summary GetListGoodsInfo接口
+// @Description 可按typeId按name按status查询列表接口
+// @Tags goodInfo相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /good/info/list [get]
 func GetListGoodsInfo(ctx *gin.Context) {
 	goodsInfoQ := query.Use(mysql.DB).GoodInfo
 	var cds []gen.Condition

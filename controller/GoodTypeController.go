@@ -30,6 +30,15 @@ func GetSimpleListGoodsType(ctx *gin.Context) {
 	response.Success(ctx, data)
 }
 
+// GetListGoodsType GetListGoodsType接口
+// @Summary GetListGoodsType接口
+// @Description 可按type按createBy按status,根据orderNum排序查询列表接口
+// @Tags goodType相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /good/type/list [get]
 func GetListGoodsType(ctx *gin.Context) {
 	goodsTypeQ := query.Use(mysql.DB).GoodType
 	typeStr := ctx.Query("type")

@@ -14,6 +14,15 @@ import (
 	"strconv"
 )
 
+// GetListGoodsStock GetListGoodsStock接口
+// @Summary GetListGoodsStock接口
+// @Description 可按accept按operateType按dept或start,end,根据createTime排序查询列表接口
+// @Tags goodStock相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /good/stock/list [get]
 func GetListGoodsStock(ctx *gin.Context) {
 	goodsStockQ := query.Use(mysql.DB).GoodStock
 	var cds []gen.Condition

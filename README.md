@@ -7,4 +7,4 @@
 
 #### 更新swagger
 >  增加文档注释
-> 执行 ```swag inti```
+> 执行 ```swag init```

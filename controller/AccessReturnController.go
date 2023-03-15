@@ -12,6 +12,15 @@ import (
 	"gorm.io/gen"
 )
 
+// AccessReturnList AccessReturnList接口
+// @Summary AccessReturnList接口
+// @Description 可按type按name按dept或start,end,根据createTime排序查询列表接口
+// @Tags ccessReturn相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /access/return/list [get]
 func AccessReturnList(ctx *gin.Context) {
 	name := ctx.Query("name")
 	dept := ctx.Query("dept")

@@ -15,6 +15,15 @@ import (
 	"strconv"
 )
 
+// GetListLeaveApply GetListLeaveApply接口
+// @Summary GetListLeaveApply接口
+// @Description 可按status按username按deptId或start,end,根据createTime排序查询列表接口
+// @Tags leaveApply相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /leave/apply/list [get]
 func GetListLeaveApply(ctx *gin.Context) {
 	usernameI, _ := ctx.Get("username")
 	username := usernameI.(string)

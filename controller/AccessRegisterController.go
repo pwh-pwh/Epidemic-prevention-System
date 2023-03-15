@@ -15,6 +15,15 @@ import (
 	"strconv"
 )
 
+// GetAccessRegisterList GetAccessRegisterList接口
+// @Summary GetAccessRegisterList接口
+// @Description 可按type按name或start,end,根据createTime排序查询列表接口
+// @Tags ccessRegister相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /access/register/list [get]
 func GetAccessRegisterList(ctx *gin.Context) {
 	name := ctx.Query("name")
 	typeStr := ctx.Query("type")

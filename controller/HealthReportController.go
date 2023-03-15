@@ -28,6 +28,15 @@ func CheckHealthReport(ctx *gin.Context) {
 	}
 }
 
+// ListHealthReport ListHealthReport接口
+// @Summary ListHealthReport
+// @Description 可按type按username按deptId或start,end,根据createTime排序查询列表接口
+// @Tags healthReport相关接口
+// @Produce application/json
+// @Param Authorization header string false "jwt"
+// @Security ApiKeyAuth
+// @Success 200 {object} response.response
+// @Router /health/report/list [get]
 func ListHealthReport(ctx *gin.Context) {
 	usernameI, _ := ctx.Get("username")
 	username := usernameI.(string)

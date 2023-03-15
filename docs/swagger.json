@@ -9,5 +9,251 @@
         },
         "version": "1.0"
     },
-    "paths": {}
+    "paths": {
+        "/access/register/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按type按name或start,end,根据createTime排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ccessRegister相关接口"
+                ],
+                "summary": "GetAccessRegisterList接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/access/return/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按type按name按dept或start,end,根据createTime排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ccessReturn相关接口"
+                ],
+                "summary": "AccessReturnList接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/good/info/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按typeId按name按status查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "goodInfo相关接口"
+                ],
+                "summary": "GetListGoodsInfo接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/good/stock/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按accept按operateType按dept或start,end,根据createTime排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "goodStock相关接口"
+                ],
+                "summary": "GetListGoodsStock接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/good/type/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按type按createBy按status,根据orderNum排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "goodType相关接口"
+                ],
+                "summary": "GetListGoodsType接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/health/report/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按type按username按deptId或start,end,根据createTime排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "healthReport相关接口"
+                ],
+                "summary": "ListHealthReport",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        },
+        "/leave/apply/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "可按status按username按deptId或start,end,根据createTime排序查询列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "leaveApply相关接口"
+                ],
+                "summary": "GetListLeaveApply接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "jwt",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "response.response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }
