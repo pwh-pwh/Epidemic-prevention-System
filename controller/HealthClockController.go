@@ -30,12 +30,12 @@ func GetListHealthClock(ctx *gin.Context) {
 	var cds []gen.Condition
 	healthClockQ := query.Use(mysql.DB).HealthClock
 	if flag {
-		healthTypeS := ctx.Query("health_type")
+		healthTypeS := ctx.Query("healthType")
 		if healthTypeS != "" {
 			atoi, _ := strconv.Atoi(healthTypeS)
 			cds = append(cds, healthClockQ.HealthType.Eq(int32(atoi)))
 		}
-		middle_highS := ctx.Query("middle_high")
+		middle_highS := ctx.Query("middleHigh")
 		if middle_highS != "" {
 			atoi, _ := strconv.Atoi(middle_highS)
 			cds = append(cds, healthClockQ.MiddleHigh.Eq(int32(atoi)))
@@ -45,7 +45,7 @@ func GetListHealthClock(ctx *gin.Context) {
 			atoi, _ := strconv.Atoi(diagnosisS)
 			cds = append(cds, healthClockQ.Diagnosis.Eq(int32(atoi)))
 		}
-		returnInfoS := ctx.Query("return_info")
+		returnInfoS := ctx.Query("returnInfo")
 		if returnInfoS != "" {
 			atoi, _ := strconv.Atoi(returnInfoS)
 			cds = append(cds, healthClockQ.ReturnInfo.Eq(int32(atoi)))
